@@ -12,6 +12,7 @@
 
 | 版本 | 内容 | 定位 |
 | --- | --- | --- |
+| v10.1.1 | 电视支架整合发布，并修复管理员页首次加载过早点击解锁会刷新的问题 | `versions/v10.1.1/`、同名 Git 标签和 Release |
 | v10.1.0 | 移动电视支架 V9 接入住记；铝型材空间支持镜柜与电视支架两个项目 | `versions/v10.1.0/`、同名 Git 标签和 Release |
 | v10.0.1 | 管理员口令轮换、重新加密资料与原图、迁移在线草稿 | `versions/v10.0.1/`、同名 Git 标签和 Release |
 | v10.0.0 | 住记完整管理员版、独立铝型材公开版、镜柜方案二展示净高400 | `versions/v10.0.0/`、同名 Git 标签和 Release |
@@ -35,16 +36,16 @@
 
 ```sh
 # 默认构建管理员完整版本，并同时生成铝型材公开版本。
-npm run release -- --version 10.1.1 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
+npm run release -- --version 10.1.2 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
 npm run release:check
 
 # 审核构建及差异后提交；不得提交口令或源台账。
 git add .
-git commit -m "Release v10.1.1"
-git tag -a v10.1.1 -m "住记 v10.1.1"
+git commit -m "Release v10.1.2"
+git tag -a v10.1.2 -m "住记 v10.1.2"
 git push origin HEAD:main
-git push origin v10.1.1
-gh release create v10.1.1 .artifacts/v10.1.1/*.zip --verify-tag --title "住记 v10.1.1" --notes-file release-notes/v10.1.1.md
+git push origin v10.1.2
+gh release create v10.1.2 .artifacts/v10.1.2/*.zip --verify-tag --title "住记 v10.1.2" --notes-file release-notes/v10.1.2.md
 ```
 
 每次应先补充 `CHANGELOG.md` 与对应 `release-notes/` 文档，并保持版本号递增。构建拒绝覆盖带 Git 标签的版本；`--rebuild` 仅用于尚未标记、尚未发布的本地构建。管理员口令沿用本机凭证文件，不同版本之间的在线加密草稿可继续读取。管理员编辑保存在自己的浏览器，不会自动修改仓库中的发布台账；更新发布数据前需把最新台账放回本机源文件，或向构建命令传入 `--source-data` 指定导出的台账。
@@ -54,6 +55,8 @@ npm run preview
 ```
 
 在 Chrome 中打开 `http://127.0.0.1:4175/home-renovation/` 查看完整发布预览。使用 HTTP(S) 地址，不能用 `file://` 打开。发布完成后提供完整线上预览地址，并在 Chrome 打开它。
+
+`npm run release:login-check` 使用 Playwright 检查慢速脚本、延迟配置和配置请求失败后的登录重试。本机预览需先启动；可用 `ZHUJI_DEPLOY_TEST_URL` 指向线上地址，`ZHUJI_CREDENTIALS_FILE` 指定仓库外的本机凭证文件。检查不输出口令，测试截图与报告仅保存在被忽略的 `.qa/` 中。
 
 ## 文件
 

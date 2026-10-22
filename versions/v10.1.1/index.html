@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer"><meta name="robots" content="noindex">
+  <title>住记 · 管理员入口</title><link rel="stylesheet" href="./access.css">
+</head>
+<body>
+  <main id="gate" class="gate">
+    <div class="brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8M5 10v11h5v-7h4v7h5V10"/></svg><span>住记</span></div>
+    <p class="eyebrow">我的家 · <span data-version>v10.1.1</span></p>
+    <h1>管理员入口</h1><p class="intro">解锁后查看全部空间、采购记录、待办和设计方案。</p>
+    <form id="unlock-form" onsubmit="event.preventDefault()">
+      <label for="passphrase">管理员口令</label>
+      <div class="password-row"><input id="passphrase" type="password" autocomplete="current-password" required aria-describedby="unlock-error"><button type="button" id="show-password" aria-pressed="false">显示</button></div>
+      <p id="unlock-error" role="alert"></p>
+      <button class="primary" id="unlock" type="submit" disabled>正在准备…</button>
+    </form>
+    <a class="public-link" href="./aluminum/">只看铝型材设计 <span aria-hidden="true">→</span></a>
+    <p class="privacy-note">口令在本机解锁资料，不会发送到服务器。</p>
+  </main>
+  <section id="session" hidden>
+    <header class="session-bar"><span>住记 <span class="session-kind">管理员 · <span data-version>v10.1.1</span></span></span><div><span id="save-state" role="status"></span><button id="lock" type="button">锁定</button></div></header>
+    <iframe id="admin-app" title="住记管理员完整预览" hidden></iframe>
+  </section>
+  <script type="module" src="./access.js"></script>
+</body>
+</html>

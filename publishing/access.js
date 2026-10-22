@@ -1,8 +1,15 @@
 const $ = selector => document.querySelector(selector);
 const encoder = new TextEncoder(), decoder = new TextDecoder();
 const draftKey = 'zhuji-encrypted-admin-drafts-v1';
-const config = await (await fetch('./vault/meta.json', { cache: 'no-store' })).json();
-document.querySelectorAll('[data-version]').forEach(e => e.textContent = config.version);
+let config;
+async function loadConfig() {
+  if (config) return config;
+  const response = await fetch('./vault/meta.json', { cache: 'no-store' });
+  if (!response.ok) throw Error('解锁配置暂时无法载入，请重新尝试。');
+  config = await response.json();
+  document.querySelectorAll('[data-version]').forEach(e => e.textContent = config.version);
+  return config;
+}
 let sessionKey, manifest, storageValues = {}, draftQueue = Promise.resolve(), blockedDrafts = false;
 let generation = 0;
 const imageURLs = new Map(), pendingImages = new Map();
@@ -55,10 +62,13 @@ $('#show-password').addEventListener('click', () => {
   $('#show-password').setAttribute('aria-pressed', String(show));
 });
 $('#unlock-form').addEventListener('submit', async event => {
-  event.preventDefault(); $('#unlock').disabled = true; $('#unlock-error').textContent = '';
+  event.preventDefault();
+  if ($('#unlock').disabled) return;
+  $('#unlock').disabled = true; $('#unlock').textContent = '正在解锁…'; $('#unlock-error').textContent = '';
   let password = $('#passphrase').value;
   try {
     if (!crypto.subtle) throw Error('请使用支持安全连接的浏览器打开预览网址。');
+    await loadConfig();
     const material = await crypto.subtle.importKey('raw', encoder.encode(password), 'PBKDF2', false, ['deriveKey']);
     password = ''; $('#passphrase').value = '';
     const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: bytesFrom64(config.salt), iterations: config.iterations, hash: 'SHA-256' }, material, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
@@ -97,7 +107,7 @@ $('#unlock-form').addEventListener('submit', async event => {
   } catch (error) {
     sessionKey = null; manifest = null; $('#passphrase').value = '';
     $('#unlock-error').textContent = error.name === 'OperationError' ? '管理员口令不正确，请重新输入。' : error.message;
-  } finally { password = ''; $('#unlock').disabled = false; }
+  } finally { password = ''; $('#unlock').disabled = false; $('#unlock').textContent = '解锁住记'; }
 });
 $('#lock').addEventListener('click', async () => {
   $('#lock').disabled = true;
@@ -111,3 +121,5 @@ $('#lock').addEventListener('click', async () => {
 window.addEventListener('beforeunload', event => {
   if ($('#save-state').textContent === '正在保存…') { event.preventDefault(); event.returnValue = ''; }
 });
+$('#unlock').disabled = false;
+$('#unlock').textContent = '解锁住记';

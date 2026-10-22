@@ -58,7 +58,7 @@ await write('vault/manifest.bin', encrypt(Buffer.from(JSON.stringify({ version:t
 await write('vault/meta.json', JSON.stringify({ version:tag, algorithm:'AES-256-GCM', derivation:'PBKDF2-SHA-256', iterations:credentials.iterations, salt:credentials.salt }, null, 2) + '\n');
 key.fill(0);
 for (const name of ['access.js', 'access.css']) await write(name, await template(name));
-await write('index.html', await template('unlock.html'));
+await write('index.html', (await template('unlock.html')).replaceAll('{{VERSION}}', tag));
 await write('admin/bridge.js', await template('admin-bridge.js'));
 
 let app = await fs.readFile(path.join(source, 'app.js'), 'utf8');

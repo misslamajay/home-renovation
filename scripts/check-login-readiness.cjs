@@ -1,0 +1,31 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path'),os=require('node:os');
+let chromium;
+try{({chromium}=require('playwright'));}catch{({chromium}=require(process.env.PLAYWRIGHT_MODULE||path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')));}
+const root=path.resolve(__dirname,'..');
+const base=(process.env.ZHUJI_DEPLOY_TEST_URL||'http://127.0.0.1:4175/home-renovation/').replace(/\/?$/,'/');
+const version=JSON.parse(fs.readFileSync(root+'/releases.json','utf8')).latest;
+const password=JSON.parse(fs.readFileSync(process.env.ZHUJI_CREDENTIALS_FILE||path.join(root,'../住记/私密发布/admin-access.json'),'utf8')).password;
+let browser;
+(async()=>{
+  fs.mkdirSync(root+'/.qa',{recursive:true});
+  browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage();page.setDefaultTimeout(15000);
+  const transmissions=[];page.on('request',r=>{if(r.url().includes(password)||(r.postData()||'').includes(password))transmissions.push('password transmitted');});
+  let releaseScript,releaseConfig,notifyConfig;
+  const scriptReady=new Promise(r=>releaseScript=r),configReady=new Promise(r=>releaseConfig=r),configSeen=new Promise(r=>notifyConfig=r);
+  await page.route('**/access.js',async route=>{await scriptReady;await route.continue();});
+  await page.route('**/vault/meta.json',async route=>{notifyConfig();await configReady;await route.continue();});
+  const url=base+'versions/'+version+'/';await page.goto(url,{waitUntil:'commit'});await page.waitForSelector('#unlock-form');
+  assert(await page.locator('#unlock').isDisabled());await page.locator('#passphrase').fill('early-submit-test');await page.locator('#passphrase').press('Enter');assert.equal(page.url(),url);
+  releaseScript();await page.waitForFunction(()=>!document.getElementById('unlock').disabled);
+  await page.locator('#unlock').click();await configSeen;assert(await page.locator('#unlock').isDisabled());assert.equal(page.url(),url);
+  releaseConfig();await page.waitForFunction(()=>document.getElementById('unlock-error').textContent.includes('不正确'));assert.equal(page.url(),url);
+  await page.locator('#passphrase').fill(password);await page.locator('#unlock').click();await page.waitForSelector('#admin-app');await page.locator('#lock').click();
+  const retry=await browser.newPage();retry.setDefaultTimeout(15000);let requests=0;
+  await retry.route('**/vault/meta.json',async route=>{requests++;if(requests===1)await route.fulfill({status:503,body:'temporarily unavailable'});else await route.continue();});
+  await retry.goto(url);await retry.locator('#passphrase').fill(password);await retry.locator('#unlock').click();
+  await retry.waitForFunction(()=>document.getElementById('unlock-error').textContent.includes('重新尝试'));
+  await retry.locator('#passphrase').fill(password);await retry.locator('#unlock').click();await retry.waitForSelector('#admin-app');assert.equal(requests,2);await retry.locator('#lock').click();
+  await retry.screenshot({path:root+'/.qa/login-ready.png'});assert.deepEqual(transmissions,[]);
+  const result={base,version,slowScriptSafe:true,slowMetadataSafe:true,failedConfigRetryWorks:true,newPasswordWorks:true,passwordTransmitted:false};
+  fs.writeFileSync(root+'/.qa/login-readiness-check.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));await browser.close();
+})().catch(async e=>{console.log(JSON.stringify({failed:e.message,stack:e.stack?.split('\n').slice(0,4)}));if(browser)await browser.close();process.exitCode=1;});

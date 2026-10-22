@@ -2,10 +2,11 @@
   "name": "home-renovation",
   "private": true,
   "type": "module",
-  "version": "10.1.0",
+  "version": "10.1.1",
   "scripts": {
     "release": "node scripts/build-release.mjs",
     "release:check": "node scripts/check-release.mjs",
+    "release:login-check": "node scripts/check-login-readiness.cjs",
     "preview": "node scripts/preview.mjs"
   }
 }
