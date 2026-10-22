@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f5f5f7"><meta name="description" content="住记，按空间整理装修采购、活动权益、待办与原图证据。"><title>住记 · 我的家</title><link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./web.css"></head>
+<body>
+  <header class="window-bar"><div class="window-identity"><button id="sidebar-toggle" class="icon-button" aria-label="空间导航" aria-expanded="false"></button><button id="back-list" class="icon-button" aria-label="返回设备列表">‹</button><strong>住记</strong></div><span class="window-title" id="page-title">我的家</span><div class="window-actions"><button id="backup-button" class="backup-button">导出备份</button><button id="search-button" class="icon-button" aria-label="搜索设备"></button><button id="add-button" class="icon-button" aria-label="添加设备"></button></div></header>
+  <button id="sidebar-backdrop" class="sidebar-backdrop" aria-label="关闭空间导航" tabindex="-1"></button>
+  <div class="app-shell" data-view="list"><aside id="sidebar" aria-label="空间与品类"></aside><section id="item-list" aria-label="设备列表"></section><main id="detail" aria-label="采购详情"></main></div>
+  <dialog id="editor"><form id="editor-form"></form></dialog><dialog id="viewer"></dialog><dialog id="backup"><div class="modal-header"><h2>导出台账备份</h2><p>包含采购、金额、待办、规则及原图引用。原图可在设备详情中单独导出。</p></div><div class="backup-body"><label for="backup-json">台账备份内容</label><textarea id="backup-json" readonly spellcheck="false"></textarea></div><footer class="modal-footer"><button id="backup-close" class="secondary-button">完成</button><a id="backup-download" class="primary-button" download="住记台账备份.json">下载备份</a></footer></dialog><div id="toast" role="status"></div>
+  <link rel="stylesheet" href="./aluminum.css">
+  <script src="./bridge.js"></script><script type="module" src="./app.js"></script>
+</body>
+</html>

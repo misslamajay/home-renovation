@@ -1,0 +1,32 @@
+{
+  "version": "v10.1.0",
+  "createdAt": "2026-10-22T12:11:59.341Z",
+  "defaultEdition": "admin",
+  "modelRevision": 12,
+  "projects": [
+    {
+      "id": "living-mirror-cabinet",
+      "name": "客厅镜柜",
+      "revision": 12
+    },
+    {
+      "id": "mobile-tv-stand",
+      "name": "移动电视支架",
+      "revision": 9
+    }
+  ],
+  "editions": {
+    "admin": {
+      "path": "./",
+      "access": "passphrase"
+    },
+    "aluminum": {
+      "path": "./aluminum/",
+      "access": "public"
+    }
+  },
+  "legacy": {
+    "version": "v9.0.0",
+    "path": "../../tv-stand.html"
+  }
+}

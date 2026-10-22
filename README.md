@@ -5,12 +5,14 @@
 - [住记管理员完整预览](https://misslamajay.github.io/home-renovation/)
 - [铝型材公开分享](https://misslamajay.github.io/home-renovation/aluminum/)
 - [所有版本与下载](https://github.com/misslamajay/home-renovation/releases)
-- [旧版移动电视架 V9](https://misslamajay.github.io/home-renovation/tv-stand.html)
+- [住记 · 移动电视支架](https://misslamajay.github.io/home-renovation/aluminum/?space=aluminum&project=mobile-tv-stand&view=model)
+- [原独立移动电视架 V9](https://misslamajay.github.io/home-renovation/tv-stand.html)
 
 ## 版本与回退
 
 | 版本 | 内容 | 定位 |
 | --- | --- | --- |
+| v10.1.0 | 移动电视支架 V9 接入住记；铝型材空间支持镜柜与电视支架两个项目 | `versions/v10.1.0/`、同名 Git 标签和 Release |
 | v10.0.1 | 管理员口令轮换、重新加密资料与原图、迁移在线草稿 | `versions/v10.0.1/`、同名 Git 标签和 Release |
 | v10.0.0 | 住记完整管理员版、独立铝型材公开版、镜柜方案二展示净高400 | `versions/v10.0.0/`、同名 Git 标签和 Release |
 | v9.0.0 | 原移动电视架 V9、材料页及 Excel | 原发布提交 `6fb048992c1a8216ebdc297fee2a54451fb9346e`，同名标签与 Release |
@@ -23,7 +25,7 @@
 
 管理员输入口令后可查看全部居家空间、采购、待办、证据原图和铝型材设计。采购数据、原图及在线浏览器草稿使用 AES-256-GCM 加密，口令通过 PBKDF2-SHA-256 派生密钥，不发送到服务器，也不进入仓库。原图按需在浏览器中解密；锁定时移除完整页面、撤销原图临时地址并清除内存中的会话。
 
-铝型材公开版只有设计导航、三维交互和尺寸说明，不包含采购数据、原图、其他居家空间或管理员菜单。修改网址参数不会获得管理员数据。公开版可以自由转发，无需 GitHub 账号。
+铝型材公开版只有设计导航、三维交互、尺寸说明和公开设计材料清单，不包含采购台账、采购原图、其他居家空间或管理员菜单。包括客厅镜柜方案二与移动电视支架 V9；电视支架原有的效果图、六张尺寸图、材料与节点核对和 Excel 下载一并保留。修改网址参数不会获得管理员数据。公开版可以自由转发，无需 GitHub 账号。
 
 这是站点的口令访问分级，**不是 GitHub 仓库的按目录权限或个人账号系统**。持有管理员口令的人具有相同的完整访问权限，不能逐人撤权。更换口令需要重新加密发布；旧版本若继续在线，旧口令仍能解锁旧版本，已下载的副本也不能撤回。仓库保留公开状态，私密内容以密文存储。
 
@@ -33,16 +35,16 @@
 
 ```sh
 # 默认构建管理员完整版本，并同时生成铝型材公开版本。
-npm run release -- --version 10.0.2 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
+npm run release -- --version 10.1.1 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
 npm run release:check
 
 # 审核构建及差异后提交；不得提交口令或源台账。
 git add .
-git commit -m "Release v10.0.2"
-git tag -a v10.0.2 -m "住记 v10.0.2"
+git commit -m "Release v10.1.1"
+git tag -a v10.1.1 -m "住记 v10.1.1"
 git push origin HEAD:main
-git push origin v10.0.2
-gh release create v10.0.2 .artifacts/v10.0.2/*.zip --verify-tag --title "住记 v10.0.2" --notes-file release-notes/v10.0.2.md
+git push origin v10.1.1
+gh release create v10.1.1 .artifacts/v10.1.1/*.zip --verify-tag --title "住记 v10.1.1" --notes-file release-notes/v10.1.1.md
 ```
 
 每次应先补充 `CHANGELOG.md` 与对应 `release-notes/` 文档，并保持版本号递增。构建拒绝覆盖带 Git 标签的版本；`--rebuild` 仅用于尚未标记、尚未发布的本地构建。管理员口令沿用本机凭证文件，不同版本之间的在线加密草稿可继续读取。管理员编辑保存在自己的浏览器，不会自动修改仓库中的发布台账；更新发布数据前需把最新台账放回本机源文件，或向构建命令传入 `--source-data` 指定导出的台账。
