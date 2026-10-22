@@ -68,7 +68,17 @@ $('#unlock-form').addEventListener('submit', async event => {
     const encryptedDraft = localStorage.getItem(draftKey);
     if (encryptedDraft) {
       try { storageValues = JSON.parse(decoder.decode(await decrypt(bytesFrom64(encryptedDraft), draftKey))); }
-      catch { blockedDrafts = true; $('#save-state').textContent = '旧草稿未解锁，请从旧版导出'; }
+      catch {
+        let migrated = false;
+        for (const previous of manifest.draftMigrationKeys || []) {
+          try {
+            const oldKey = await crypto.subtle.importKey('raw', bytesFrom64(previous.key), 'AES-GCM', false, ['decrypt']);
+            storageValues = JSON.parse(decoder.decode(await decrypt(bytesFrom64(encryptedDraft), draftKey, oldKey)));
+            migrated = true; storeDraft(); await draftQueue; break;
+          } catch {}
+        }
+        if (!migrated) { blockedDrafts = true; $('#save-state').textContent = '旧草稿未解锁，请从旧版导出'; }
+      }
     }
     const api = Object.freeze({
       source: () => { if (!sessionKey) throw Error('住记已锁定。'); return structuredClone(manifest.source); },

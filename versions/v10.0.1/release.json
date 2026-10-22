@@ -1,0 +1,20 @@
+{
+  "version": "v10.0.1",
+  "createdAt": "2026-10-22T11:50:08.636Z",
+  "defaultEdition": "admin",
+  "modelRevision": 12,
+  "editions": {
+    "admin": {
+      "path": "./",
+      "access": "passphrase"
+    },
+    "aluminum": {
+      "path": "./aluminum/",
+      "access": "public"
+    }
+  },
+  "legacy": {
+    "version": "v9.0.0",
+    "path": "../../tv-stand.html"
+  }
+}

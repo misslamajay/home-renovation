@@ -1,20 +1,8 @@
 {
   "version": "v10.0.0",
-  "createdAt": "2026-10-22T11:23:46.778Z",
-  "defaultEdition": "admin",
-  "modelRevision": 12,
-  "editions": {
-    "admin": {
-      "path": "./",
-      "access": "passphrase"
-    },
-    "aluminum": {
-      "path": "./aluminum/",
-      "access": "public"
-    }
-  },
-  "legacy": {
-    "version": "v9.0.0",
-    "path": "../../tv-stand.html"
-  }
+  "status": "admin-retired",
+  "replacement": "v10.0.1",
+  "publicPath": "./aluminum/",
+  "originalTagPreserved": true,
+  "retiredAt": "2026-10-22T11:52:03.059Z"
 }

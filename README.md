@@ -11,10 +11,13 @@
 
 | 版本 | 内容 | 定位 |
 | --- | --- | --- |
+| v10.0.1 | 管理员口令轮换、重新加密资料与原图、迁移在线草稿 | `versions/v10.0.1/`、同名 Git 标签和 Release |
 | v10.0.0 | 住记完整管理员版、独立铝型材公开版、镜柜方案二展示净高400 | `versions/v10.0.0/`、同名 Git 标签和 Release |
 | v9.0.0 | 原移动电视架 V9、材料页及 Excel | 原发布提交 `6fb048992c1a8216ebdc297fee2a54451fb9346e`，同名标签与 Release |
 
 稳定入口指向当前版本；历史版本有独立路径、标签、更新记录、校验值和下载包。已发布的版本目录和标签不覆盖。回退时只修改稳定入口指向，不改写历史。`releases.json` 是版本索引，`CHANGELOG.md` 记录变更。
+
+管理员口令轮换是安全例外：旧管理员线上入口、当前发布分支的旧密文及旧管理员下载包可停用；保留历史标签、公开展示和本机归档。v10.0.0的管理员线上入口已停用，改密不能撤回Git历史及已下载的旧副本。
 
 ## 访问范围
 
@@ -30,16 +33,16 @@
 
 ```sh
 # 默认构建管理员完整版本，并同时生成铝型材公开版本。
-npm run release -- --version 10.0.1 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
+npm run release -- --version 10.0.2 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
 npm run release:check
 
 # 审核构建及差异后提交；不得提交口令或源台账。
 git add .
-git commit -m "Release v10.0.1"
-git tag -a v10.0.1 -m "住记 v10.0.1"
+git commit -m "Release v10.0.2"
+git tag -a v10.0.2 -m "住记 v10.0.2"
 git push origin HEAD:main
-git push origin v10.0.1
-gh release create v10.0.1 .artifacts/v10.0.1/*.zip --verify-tag --title "住记 v10.0.1" --notes-file release-notes/v10.0.1.md
+git push origin v10.0.2
+gh release create v10.0.2 .artifacts/v10.0.2/*.zip --verify-tag --title "住记 v10.0.2" --notes-file release-notes/v10.0.2.md
 ```
 
 每次应先补充 `CHANGELOG.md` 与对应 `release-notes/` 文档，并保持版本号递增。构建拒绝覆盖带 Git 标签的版本；`--rebuild` 仅用于尚未标记、尚未发布的本地构建。管理员口令沿用本机凭证文件，不同版本之间的在线加密草稿可继续读取。管理员编辑保存在自己的浏览器，不会自动修改仓库中的发布台账；更新发布数据前需把最新台账放回本机源文件，或向构建命令传入 `--source-data` 指定导出的台账。

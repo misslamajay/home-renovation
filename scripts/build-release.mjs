@@ -34,7 +34,7 @@ else {
   await fs.mkdir(path.dirname(credentialsPath), { recursive:true, mode:0o700 });
   await fs.writeFile(credentialsPath, JSON.stringify(credentials, null, 2) + '\n', { mode:0o600, flag:'wx' });
 }
-if (typeof credentials.password !== 'string' || credentials.password.length < 20 || !credentials.salt || credentials.iterations < 600000) throw Error('管理员凭证格式无效或口令太短。');
+if (typeof credentials.password !== 'string' || credentials.password.length < (credentials.userChosenPassword ? 8 : 20) || !credentials.salt || credentials.iterations < 600000) throw Error('管理员凭证格式无效或口令太短。');
 const key = crypto.pbkdf2Sync(credentials.password, Buffer.from(credentials.salt, 'base64'), credentials.iterations, 32, 'sha256');
 const encrypt = (bytes, resource) => {
   const iv = crypto.randomBytes(12), cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
@@ -54,7 +54,7 @@ for (const item of sourceData.items) for (const entry of item.evidence || []) {
   evidence[name] = { path:resource, mime, sha256:crypto.createHash('sha256').update(bytes).digest('hex') };
   await write(resource, encrypt(bytes, tag + '/' + resource));
 }
-await write('vault/manifest.bin', encrypt(Buffer.from(JSON.stringify({ version:tag, source:sourceData, evidence })), tag + '/manifest'));
+await write('vault/manifest.bin', encrypt(Buffer.from(JSON.stringify({ version:tag, source:sourceData, evidence, draftMigrationKeys:credentials.draftMigrationKeys||[] })), tag + '/manifest'));
 await write('vault/meta.json', JSON.stringify({ version:tag, algorithm:'AES-256-GCM', derivation:'PBKDF2-SHA-256', iterations:credentials.iterations, salt:credentials.salt }, null, 2) + '\n');
 key.fill(0);
 for (const name of ['access.js', 'access.css']) await write(name, await template(name));

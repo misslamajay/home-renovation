@@ -1,0 +1,23 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const privateDir=path.resolve(root,'../住记/私密发布');
+const file=path.join(privateDir,'admin-access.json');
+const requestFile=process.argv[2];
+if(!requestFile)throw Error('请提供仓库外的本机口令变更文件。');
+const input=path.resolve(requestFile);
+if(input.startsWith(root+path.sep))throw Error('口令变更文件必须保存在仓库外。');
+const requested=JSON.parse(await fs.readFile(input,'utf8'));
+if(typeof requested.password!=='string'||requested.password.length<8)throw Error('自选管理员口令至少8个字符。');
+const previous=JSON.parse(await fs.readFile(file,'utf8'));
+if(previous.password===requested.password){console.log('管理员凭证已是指定口令，无需重复轮换。');process.exit(0);}
+const version=JSON.parse(await fs.readFile(path.join(root,'releases.json'),'utf8')).latest;
+const oldKey=crypto.pbkdf2Sync(previous.password,Buffer.from(previous.salt,'base64'),previous.iterations,32,'sha256');
+const backup=path.join(privateDir,'admin-access.before-'+version+'.json');
+await fs.writeFile(backup,JSON.stringify(previous,null,2)+'\n',{flag:'wx',mode:0o600});
+const current={...previous,password:requested.password,userChosenPassword:true,salt:crypto.randomBytes(32).toString('base64'),rotatedAt:new Date().toISOString(),draftMigrationKeys:[{fromVersion:version,key:oldKey.toString('base64')},...(previous.draftMigrationKeys||[])]};
+await fs.writeFile(file,JSON.stringify(current,null,2)+'\n',{mode:0o600});
+await fs.chmod(file,0o600);oldKey.fill(0);
+console.log(JSON.stringify({updated:true,credentialsFile:file,previousCredentialsBackup:backup,draftMigration:true}));

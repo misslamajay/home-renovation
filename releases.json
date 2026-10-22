@@ -2,8 +2,8 @@
   "defaultEdition": "admin",
   "releases": [
     {
-      "version": "v10.0.0",
-      "createdAt": "2026-10-22T11:23:46.778Z",
+      "version": "v10.0.1",
+      "createdAt": "2026-10-22T11:50:08.636Z",
       "defaultEdition": "admin",
       "modelRevision": 12,
       "editions": {
@@ -22,11 +22,33 @@
       }
     },
     {
+      "version": "v10.0.0",
+      "createdAt": "2026-10-22T11:23:46.778Z",
+      "defaultEdition": "admin",
+      "modelRevision": 12,
+      "editions": {
+        "admin": {
+          "path": "./",
+          "access": "passphrase"
+        },
+        "aluminum": {
+          "path": "./aluminum/",
+          "access": "public"
+        }
+      },
+      "legacy": {
+        "version": "v9.0.0",
+        "path": "../../tv-stand.html"
+      },
+      "adminRetired": true,
+      "replacement": "v10.0.1"
+    },
+    {
       "version": "v9.0.0",
       "path": "versions/v9.0.0/",
       "commit": "6fb048992c1a8216ebdc297fee2a54451fb9346e",
       "legacy": true
     }
   ],
-  "latest": "v10.0.0"
+  "latest": "v10.0.1"
 }
