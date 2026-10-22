@@ -1,0 +1,16 @@
+import http from 'node:http';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.md':'text/plain; charset=utf-8','.png':'image/png','.jpg':'image/jpeg'};
+const prefix='/home-renovation';
+http.createServer(async(req,res)=>{try{
+  const url=new URL(req.url,'http://localhost');
+  const relative=decodeURIComponent(url.pathname).replace(new RegExp('^'+prefix),'');
+  if(relative.split('/').some(p=>p.startsWith('.'))){res.writeHead(404);res.end();return;}
+  let file=path.resolve(root,'.'+relative);
+  if(!file.startsWith(root+path.sep)&&file!==root){res.writeHead(404);res.end();return;}
+  if((await fs.stat(file)).isDirectory())file=path.join(file,'index.html');
+  const bytes=await fs.readFile(file);res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(bytes);
+}catch{res.writeHead(404);res.end('Not found');}}).listen(Number(process.env.PORT||4175),'127.0.0.1',()=>console.log('发布预览：http://127.0.0.1:'+(process.env.PORT||4175)+prefix+'/'));

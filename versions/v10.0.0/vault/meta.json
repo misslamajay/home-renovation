@@ -1,0 +1,7 @@
+{
+  "version": "v10.0.0",
+  "algorithm": "AES-256-GCM",
+  "derivation": "PBKDF2-SHA-256",
+  "iterations": 600000,
+  "salt": "FhQe519wWqGXxeruv2xsU7SXaPPNWJech9l8OCaeWYI="
+}

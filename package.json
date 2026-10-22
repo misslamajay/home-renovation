@@ -1,0 +1,11 @@
+{
+  "name": "home-renovation",
+  "private": true,
+  "type": "module",
+  "version": "10.0.0",
+  "scripts": {
+    "release": "node scripts/build-release.mjs",
+    "release:check": "node scripts/check-release.mjs",
+    "preview": "node scripts/preview.mjs"
+  }
+}
