@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>电梯鞋柜 · 阴角框架</title><link rel="stylesheet" href="./frame.css"></head>
+<body data-view="model">
+  <main id="shoe-cabinet-frame">
+    <section class="model-card" aria-label="电梯鞋柜三维框架">
+      <div class="toolbar">
+        <div class="view-buttons" aria-label="框架视角"><button data-view="overall" aria-pressed="true">整体</button><button data-view="top" aria-pressed="false">俯视</button><button data-view="left" aria-pressed="false">左侧正视</button><button data-view="right" aria-pressed="false">右侧正视</button></div>
+        <div class="switches"><label><input type="checkbox" id="show-walls" checked>墙角</label><label><input type="checkbox" id="show-dimensions" checked>尺寸</label><button id="reset-view" class="reset">复位</button></div>
+      </div>
+      <div class="scene"><canvas id="frame-canvas" tabindex="0" aria-label="可旋转的L形阴角铝型材框架：左侧1380乘400乘2350，右侧1350乘400乘2350毫米，转角400乘400共用，型材30乘30毫米。使用方向键旋转，加减键缩放，Home复位。"></canvas><canvas id="dimension-overlay" aria-hidden="true"></canvas></div>
+      <div class="scene-footer"><span id="view-status" role="status">整体 · L 形阴角</span><span>拖动旋转 · 滚轮 / 双指缩放</span></div>
+    </section>
+    <div class="frame-summary"><p><span class="left-mark">左侧框架</span><strong>1380 × 400 × 2350 <small>mm</small></strong></p><p><span class="right-mark">右侧框架</span><strong>1350 × 400 × 2350 <small>mm</small></strong></p></div>
+    <p class="corner-note">两侧从同一个墙角量起，400 × 400 mm 转角共用。型材截面 30 × 30 mm。</p>
+  </main>
+  <script type="module" src="./frame.js"></script>
+</body></html>

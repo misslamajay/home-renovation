@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
+import { validateShoeFrame } from './check-shoe-frame.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const index=JSON.parse(await fs.readFile(path.join(root,'releases.json'),'utf8'));
 const dir=path.join(root,'versions',index.latest);
@@ -42,4 +43,6 @@ for(const name of ['index.html','dimensions.html','materials.html']){
   }
 }
 for(const name of ['model.js','site.js','zhuji-embed.js'])new vm.Script(await fs.readFile(path.join(tvDirectory,'assets',name),'utf8'));
-console.log(JSON.stringify({version:index.latest,verifiedFiles:lines.length,publicFiles:publicFiles.length,defaultEdition:'admin',privateData:'encrypted',checks:'passed'}));
+assert(manifest.projects.some(p=>p.id==='elevator-shoe-cabinet'));
+const shoeFrame=await validateShoeFrame(dir);
+console.log(JSON.stringify({version:index.latest,verifiedFiles:lines.length,publicFiles:publicFiles.length,defaultEdition:'admin',privateData:'encrypted',shoeFrame,checks:'passed'}));

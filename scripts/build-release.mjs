@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -79,6 +79,8 @@ adminHTML = adminHTML.replaceAll('href="/', 'href="./').replaceAll('src="/', 'sr
 adminHTML = replaceOnce(adminHTML, '<script type="module" src="./app.js"></script>', '<script src="./bridge.js"></script><script type="module" src="./app.js"></script>', '管理员启动');
 await write('admin/app.html', adminHTML);
 const aluminumSource = await fs.readFile(path.join(source, 'aluminum.js'), 'utf8');
+const projectCatalog = (await import(pathToFileURL(path.join(source, 'aluminum.js')).href)).aluminumProjects;
+if (!Array.isArray(projectCatalog) || projectCatalog.some(p => !p.id || !p.name)) throw Error('设计项目目录无效。');
 for (const [edition, directory] of [['admin', '../aluminum/designs/aluminum'], ['aluminum', './designs/aluminum']]) {
   const aluminum = replaceOnce(aluminumSource, "const designDirectory = '/designs/aluminum';", 'const designDirectory = ' + JSON.stringify(directory) + ';', '设计资源目录');
   await write(edition + '/aluminum.js', aluminum);
@@ -88,7 +90,7 @@ await write('aluminum/index.html', (await template('public.html')).replaceAll('{
 await write('aluminum/public-app.js', await template('public-app.js'));
 await fs.cp(path.join(source, 'designs'), path.join(stage, 'aluminum/designs'), { recursive:true });
 await fs.appendFile(path.join(stage, 'aluminum/aluminum.css'), '\n.public-version{font-size:11px;color:#85858d;white-space:nowrap}.window-actions [hidden]{display:none!important}@media(max-width:480px){.public-version{font-size:10px}}\n');
-const release = { version:tag, createdAt:new Date().toISOString(), defaultEdition:'admin', modelRevision:12, projects:[{id:'living-mirror-cabinet',name:'客厅镜柜',revision:12},{id:'mobile-tv-stand',name:'移动电视支架',revision:9}], editions:{ admin:{path:'./',access:'passphrase'}, aluminum:{path:'./aluminum/',access:'public'} }, legacy:{version:'v9.0.0',path:'../../tv-stand.html'} };
+const release = { version:tag, createdAt:new Date().toISOString(), defaultEdition:'admin', modelRevision:projectCatalog.find(p=>p.id==='living-mirror-cabinet')?.revision, projects:projectCatalog.map(({id,name,revision})=>({id,name,revision})), editions:{ admin:{path:'./',access:'passphrase'}, aluminum:{path:'./aluminum/',access:'public'} }, legacy:{version:'v9.0.0',path:'../../tv-stand.html'} };
 await write('release.json', JSON.stringify(release, null, 2) + '\n');
 await write('README.txt', '住记 '+tag+'\n默认入口：管理员口令解锁。aluminum/ 为公开铝型材版。\n本包不含管理员口令或明文采购资料。通过 HTTP(S) 服务器预览，不能用 file:// 打开。\n');
 async function filesIn(dir) { const entries = await fs.readdir(dir, { withFileTypes:true }); const lists = await Promise.all(entries.map(e => e.isDirectory() ? filesIn(path.join(dir,e.name)) : [path.join(dir,e.name)])); return lists.flat(); }
