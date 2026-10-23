@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>电梯鞋柜 · L形框架与换鞋凳</title><link rel="stylesheet" href="./frame.css"><link rel="stylesheet" href="./corner.css"></head>
+<body data-view="model" data-layout="bench">
+  <main id="shoe-cabinet-frame">
+    <section class="model-card" aria-label="电梯鞋柜三维框架">
+      <div class="toolbar">
+        <div class="view-buttons" aria-label="框架视角"><button data-view="overall" aria-pressed="true">整体</button><button data-view="shelves" aria-pressed="false">左侧鞋层</button><button data-view="lightbox" aria-pressed="false">灯箱近看</button><button data-view="bench" aria-pressed="false">换鞋凳近看</button><button data-view="top" aria-pressed="false">俯视</button><button data-view="left" aria-pressed="false">左侧正视</button><button data-view="right" aria-pressed="false">右侧正视</button></div>
+        <div class="switches"><label><input type="checkbox" id="show-walls" checked>墙角</label><label><input type="checkbox" id="show-dimensions" checked>尺寸</label><label><input type="checkbox" id="show-reference">原框架对比</label><button id="reset-view" class="reset">复位</button></div>
+      </div>
+      <div class="tray-actions"><span id="drawer-motion-status">两只踢脚抽独立移动 · 下层穿过鞋，上层拖鞋</span><div><button id="toggle-used">脚触下层</button><button id="toggle-slippers">脚触上层</button><button id="close-drawers">全部收起</button></div></div>
+      <div class="scene"><canvas id="frame-canvas" tabindex="0" aria-label="可旋转的L形鞋柜。左侧从下向上九层净高120、130、170、170、170、260、160、160、160毫米；上部预留净高340。右侧坐面高500，拖鞋踢脚抽净高150、换下的鞋182，透明亚克力托盘可独立抽出300；顶部怪兽小屋暖白灯箱。方向键旋转，加减键缩放，Home复位。"></canvas><canvas id="dimension-overlay" aria-hidden="true"></canvas></div>
+      <div class="scene-footer"><span id="view-status" role="status">整体 · L 形阴角</span><span>拖动旋转 · 滚轮 / 双指缩放</span></div>
+      <div class="tray-controls bench-controls" aria-label="踢脚抽独立控制"><label for="drawer-0"><span>下层 · 穿过的鞋 <output id="drawer-value-0" for="drawer-0">220 mm</output></span><input id="drawer-0" data-drawer="0" type="range" min="0" max="300" step="10" value="220"></label><label for="drawer-1"><span>上层 · 拖鞋 <output id="drawer-value-1" for="drawer-1">120 mm</output></span><input id="drawer-1" data-drawer="1" type="range" min="0" max="300" step="10" value="120"></label></div>
+    </section>
+    <div class="frame-legend"><span><i class="shared-swatch"></i>蓝色：两侧共用的连接柱及连接横梁</span><span id="reference-legend" hidden><i class="removed-swatch"></i>红色虚线：本次取消的型材</span></div>
+    <div class="frame-summary"><p><span class="left-mark">左侧框架</span><strong>1380 × 400 × 2350 <small>mm</small></strong></p><p><span class="right-mark">右侧框架</span><strong>1350 × 400 × 2350 <small>mm</small></strong></p></div>
+    <div class="preview-metrics"><p><span>坐面顶面离地</span><strong>500 <small>mm</small></strong></p><p><span>坐板宽 × 深 × 厚</span><strong>920 × 400 × 24 <small>mm</small></strong></p><p><span>两只踢脚抽行程</span><strong>各300 <small>mm</small></strong></p></div>
+    <section class="corner-explanation" aria-label="怪兽小屋灯箱说明"><h2>怪兽小屋 · 顶部暖白灯箱</h2><p>右侧换鞋凳正上方、顶梁下嵌入<strong>920 × 180 × 80 mm</strong>灯箱，暖白透光面板配深色“怪兽小屋”字样。灯箱底面离地<strong>2140 mm</strong>、顶面2320 mm，整体框架高2350 mm。坐面至灯箱底面净空<strong>1640 mm</strong>。点击“灯箱近看”可旋转查看字面及箱体厚度。</p></section>
+    <section class="corner-explanation" aria-label="左侧鞋层说明"><h2>左侧九层鞋区 · 按净高分配</h2><p>从下向上：<strong>拖鞋120 mm</strong>、<strong>小平板鞋130 mm</strong>、<strong>休闲鞋三层各170 mm</strong>、<strong>高筒鞋260 mm</strong>，上方再增加<strong>三层各160 mm</strong>。层板厚18 mm，下方配30 mm型材承梁；标注净高已扣除这两项。第一层从离地48 mm的板面起算，九层上方板面到1980 mm。</p><p>层板贯通左柜并避让立柱，中央主体净宽1320、净深340 mm；上部剩余<strong>340 mm净高</strong>暂留。点击“左侧鞋层”可近看各层，分区尺寸页附离地尺寸表。</p></section>
+    <section class="corner-explanation" aria-label="换鞋凳与踢脚抽说明"><h2>右侧踢脚抽 · 拖鞋150，换下的鞋182</h2><p>坐面顶高<strong>500 mm</strong>，坐板920 × 400 × 24 mm，由固定承梁与支承板承托。两抽为透明亚克力托盘，前挡边40 mm，中心踢脚条离地下层72、上层300 mm。</p><p><strong>上层拖鞋净高150 mm</strong>，量至前承梁下沿446 mm；在保留底板、隔板与开合间隙后，其余高度给下层换下来的鞋，含透明防污垫后<strong>净高182 mm</strong>。两抽独立向外抽出300 mm，点击“脚触下层 / 上层”或拖动滑块查看。</p></section>
+    <p class="corner-note">尺寸与运动为本地构造预览。亚克力板厚、导轨连接与脚触五金待实物选型，坐面承载待核算。</p>
+  </main>
+  <script type="module" src="./frame.js"></script>
+</body></html>

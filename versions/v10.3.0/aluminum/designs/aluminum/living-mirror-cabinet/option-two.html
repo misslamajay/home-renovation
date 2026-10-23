@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>客厅镜柜 · 方案二</title>
+  <link rel="stylesheet" href="./model-host.css">
+  <script src="./model-host.js"></script>
+</head>
+<body>
+<div id="tall-cabinet-frame">
+  <div class="viz-row cabinet-heading">
+    <h3>方案二 · 完整柜体总览</h3>
+    <span class="text-small text-muted tabular-nums">宽 1000 × 深 660 × 高 2300 mm</span>
+  </div>
+  <div class="viz-controls" aria-label="框架显示方式">
+    <button type="button" class="btn" data-mode="model" aria-pressed="true">三维总览</button>
+    <button type="button" class="btn" data-mode="layout" aria-pressed="false">分区尺寸</button>
+    <button type="button" class="btn" data-mode="bottom-plan" aria-pressed="false">底部尺寸</button>
+    <button type="button" class="btn" data-mode="dimensions" aria-pressed="false">主体尺寸</button>
+  </div>
+  <div data-model-panel>
+    <div class="viz-controls" aria-label="完整方案展示状态">
+      <button type="button" class="btn" data-preset="open" aria-pressed="true">整体展开</button>
+      <button type="button" class="btn" data-preset="closed" aria-pressed="false">闭合外观</button>
+      <button type="button" class="btn" data-preset="mirror" aria-pressed="false">镜面展示</button>
+    </div>
+    <div class="cabinet-stage">
+      <canvas data-scene aria-label="方案二：下柜高1802、深500，顶部展示区外高498、深660；扣除顶板及底板后的展示净高400，总高2300毫米。上部后侧伸缩轨连接60毫米高顶部承梁带；两层门可各自或联动右移。收合宽1米，右侧无固定轨道。">展示净高400毫米的齐深展示与双层右滑方案</canvas>
+      <div data-error role="alert" hidden>三维显示未启用，可切换至尺寸图查看框架。</div>
+    </div>
+    <div class="cabinet-slide-control">
+      <label class="form-check"><input class="form-check-input" type="checkbox" data-linked><span class="form-check-label" data-link-label>一起移动（插销联动）</span></label>
+      <div class="viz-row"><label class="form-label" for="cabinet-front-slide">镜子右移 <output data-slide-output class="tabular-nums">300</output> mm</label><button type="button" class="btn" data-slide-toggle>收回镜子</button></div>
+      <input id="cabinet-front-slide" class="form-range" type="range" min="0" max="1000" step="10" value="300" aria-label="镜子向右移动距离，毫米" data-slide>
+      <div class="viz-row"><label class="form-label" for="cabinet-peg-slide">洞洞板右移 <output data-peg-output class="tabular-nums">800</output> mm</label><button type="button" class="btn" data-peg-toggle>收回洞洞板</button></div>
+      <input id="cabinet-peg-slide" class="form-range" type="range" min="0" max="1000" step="10" value="800" aria-label="洞洞板向右移动距离，毫米" data-peg>
+    </div>
+    <div class="viz-controls" aria-label="框架视角">
+      <button type="button" class="btn btn-ghost" data-view="bottom" aria-pressed="false">底部</button>
+      <button type="button" class="btn btn-ghost" data-view="perspective" aria-pressed="true">整体</button>
+      <button type="button" class="btn btn-ghost" data-view="connection" aria-pressed="false">顶部连接剖视</button>
+      <button type="button" class="btn btn-ghost" data-view="mid-connection" aria-pressed="false">中部连接剖视</button>
+      <button type="button" class="btn btn-ghost" data-view="display" aria-pressed="false">展示层</button>
+      <button type="button" class="btn btn-ghost" data-view="front" aria-pressed="false">正面</button>
+      <button type="button" class="btn btn-ghost" data-view="side" aria-pressed="false">侧面</button>
+      <button type="button" class="btn btn-ghost" data-view="back" aria-pressed="false">背面</button>
+    </div>
+    <div class="viz-controls" aria-label="显示内容">
+      <label class="form-check"><input class="form-check-input" type="checkbox" data-drawers><span class="form-check-label" data-drawer-label>拉开抽屉</span></label>
+      <label class="form-check"><input class="form-check-input" type="checkbox" data-equipment checked><span class="form-check-label">器材占位</span></label>
+      <label class="form-check"><input class="form-check-input" type="checkbox" data-mid-support checked><span class="form-check-label">中部防摆连接</span></label>
+      <label class="form-check"><input class="form-check-input" type="checkbox" data-cover checked><span class="form-check-label">亚克力罩</span></label>
+      <label class="form-check"><input class="form-check-input" type="checkbox" data-header checked><span class="form-check-label">轨道饰面</span></label>
+      <label class="form-check"><input class="form-check-input" type="checkbox" data-figures checked><span class="form-check-label">手办占位</span></label>
+    </div>
+    <div class="viz-row text-small text-muted cabinet-caption">
+      <span>拖动旋转 · 滚轮 / 双指缩放</span>
+      <span data-view-label aria-live="polite">展示区齐深 · 内藏轨道仍需悬臂校核</span>
+    </div>
+  </div>
+  <div data-layout-panel hidden>
+    <canvas data-layout="front" aria-label="柜体分区正视尺寸：宽1000毫米，每列净宽455毫米。最下方缓降绳包与壶铃两格净高418毫米，上方急救包及哑铃两格净高300毫米；左右各一只150毫米抽屉；左上三格净高各230毫米，右上两格净高各354毫米。柜体1802加展示区外高498，总高2300毫米。展示区扣除顶板、底板后的净高400毫米。"></canvas>
+    <div class="text-small text-muted">柜内分区，单位 mm · 抽屉 150 为分配高度 · 外置前框见三维</div>
+  </div>
+  <div data-bottom-plan-panel hidden>
+    <div class="cabinet-bottom-drawings">
+      <div><div class="text-small">正视 · 净空与层板高度（mm）</div><canvas data-bottom-diagram="front" aria-label="底部正视尺寸：下方两格净高418毫米，上方两格净高300毫米，底部总高878毫米，每侧净宽455毫米。"></canvas></div>
+      <div><div class="text-small">下层俯视 · 绳包 / 壶铃（mm）</div><canvas data-bottom-diagram="lower" aria-label="下层俯视：左侧350乘350绳包预留，右侧222乘172壶铃，平台有效深420毫米。"></canvas></div>
+      <div><div class="text-small">上层俯视 · 急救包 / 哑铃（mm）</div><canvas data-bottom-diagram="upper" aria-label="上层俯视：左侧400乘320急救包预留，右侧两只320乘136哑铃，前后两排。"></canvas></div>
+    </div>
+  </div>
+  <div data-dimensions-panel hidden>
+    <div class="cabinet-dimensions">
+      <div><div class="text-small">正视 · 宽 × 高</div><canvas data-dimension="front" aria-label="正视：宽1000，总高2300，柜体1802，展示区外高498，扣除顶板和底板后净高400毫米"></canvas></div>
+      <div><div class="text-small">侧视 · 深 × 高</div><canvas data-dimension="side" aria-label="侧视：展示区深660、下柜深500，总高2300毫米"></canvas></div>
+      <div><div class="text-small">背视 · 宽 × 高</div><canvas data-dimension="back" aria-label="背视：宽1000，总高2300，柜体1802，展示区外高498，扣除顶板和底板后净高400毫米"></canvas></div>
+      <div><div class="text-small">俯视 · 宽 × 深</div><canvas data-dimension="top" aria-label="俯视：展示区宽1000，深660毫米"></canvas></div>
+    </div>
+  </div>
+  <div class="text-small text-muted cabinet-spec" data-option-spec>展示区外廓 1000 × 660 × 498 mm · 实际净高 400 mm（已扣除顶板、底板） · 最下排净高 418 mm</div>
+</div>
+<style>
+  #tall-cabinet-frame { color:var(--foreground); }
+  #tall-cabinet-frame .cabinet-heading { justify-content:space-between; gap:8px; padding-right:90px; margin-bottom:12px; }
+  #tall-cabinet-frame h3 { margin:0; }
+  #tall-cabinet-frame .cabinet-stage { position:relative; }
+  #tall-cabinet-frame [data-scene] { display:block; width:100%; height:clamp(540px,95vw,720px); touch-action:none; cursor:grab; }
+  #tall-cabinet-frame [data-scene]:active { cursor:grabbing; }
+  #tall-cabinet-frame [data-error] { position:absolute; inset:0; display:grid; place-content:center; }
+  #tall-cabinet-frame [data-error][hidden], #tall-cabinet-frame [hidden] { display:none; }
+  #tall-cabinet-frame .cabinet-caption { justify-content:space-between; gap:8px; margin-top:8px; }
+  #tall-cabinet-frame .cabinet-spec { margin-top:12px; }
+  #tall-cabinet-frame .cabinet-slide-control { display:grid; gap:6px; margin:12px 0; }
+  #tall-cabinet-frame .cabinet-slide-control .viz-row { justify-content:space-between; gap:8px; }
+  #tall-cabinet-frame .cabinet-dimensions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:20px; }
+  #tall-cabinet-frame [data-dimension] { display:block; width:100%; height:370px; }
+  #tall-cabinet-frame .cabinet-bottom-drawings { display:grid; gap:20px; margin-top:20px; }
+  #tall-cabinet-frame [data-bottom-diagram] { display:block; width:100%; height:360px; }
+  #tall-cabinet-frame [data-layout] { display:block; width:100%; height:780px; margin-top:16px; }
+  @media(max-width:560px) {
+    #tall-cabinet-frame .cabinet-heading { display:block; }
+    #tall-cabinet-frame [data-scene] { height:400px; }
+    #tall-cabinet-frame h3 { margin-bottom:6px; }
+    #tall-cabinet-frame .cabinet-dimensions { grid-template-columns:minmax(0,1fr); }
+    #tall-cabinet-frame [data-bottom-diagram] { height:230px; }
+    #tall-cabinet-frame [data-bottom-diagram="front"] { height:280px; }
+    #tall-cabinet-frame [data-layout] { height:700px; }
+  }
+</style>
+<script>
+(function(){
+  'use strict';
+  const root=document.getElementById('tall-cabinet-frame');if(!root)return;
+  const D={width:1000,depth:500,displayDepth:660,displayCenterZ:80,trackBand:60,displayNetHeight:400,height:2300,section:30,acrylic:4,shelfThickness:8};
+  // The roof is inset in the top frame: its underside meets the frame underside.
+  D.displayHeight=D.trackBand+D.shelfThickness+D.displayNetHeight+D.section;
+  D.bodyHeight=D.height-D.displayHeight;
+  const heightReduction=1900-D.bodyHeight,lower=y=>y-heightReduction;
+  const identity='tall-cabinet-option-two-v12',q=s=>root.querySelector(s),qa=s=>Array.from(root.querySelectorAll(s));
+  const ws=window.openai&&window.openai.widgetState,stored=ws&&ws.privateContent;
+  const saved=stored&&stored.modelId===identity?stored:{};
+  const finite=(value,fallback)=>Number.isFinite(value)?value:fallback;
+  const state={mode:['model','dimensions','bottom-plan','layout'].includes(saved.mode)?saved.mode:'model',view:saved.view||'perspective',focus:['whole','bottom','display','connection','mid-connection'].includes(saved.focus)?saved.focus:'whole',
+    cover:saved.cover!==false,figures:saved.figures!==false,equipment:saved.equipment!==false,drawers:saved.drawers===true,slide:Math.max(0,Math.min(1000,finite(saved.slide,1000))),pegSlide:Math.max(0,Math.min(1000,finite(saved.pegSlide,1000))),linked:saved.linked===true,activeLayer:saved.activeLayer==='peg'?'peg':'mirror',yaw:finite(saved.yaw,.42),pitch:Math.max(-.45,Math.min(1.3,finite(saved.pitch,.15))),zoom:Math.max(.6,Math.min(2.5,finite(saved.zoom,1)))};
+  if(state.linked)state.pegSlide=state.slide;
+  state.header=saved.header!==false;
+  state.midSupport=saved.midSupport!==false;
+  const topPlan={displayDepth:660,displayBack:-250,displayFront:410,trackBand:{bottom:D.bodyHeight,top:D.bodyHeight+D.trackBand},displayFloor:D.bodyHeight+D.trackBand+D.shelfThickness,displayNetHeight:D.displayNetHeight,roofUnderside:D.height-D.section,roofThickness:D.acrylic,floorThickness:D.shelfThickness,clearBoundsMm:{min:[-470,D.bodyHeight+D.trackBand+D.shelfThickness,-220],max:[470,D.height-D.section,380]},closedWidth:1000,rightFixedRail:false,primarySupport:'后侧上下伸缩轨，分别连接镜子与洞洞板',loadPath:'门框—后侧伸缩轨—固定轨顶部连接板—宽向梁—深向梁—主体原立柱',rating:'顶部构造加强示意，尚未选定五金及锚固承载；满行程仍需校核悬臂、节点及整柜稳定'};
+  const storagePlan={height:lower(976),bayWidth:455,effectiveDepth:420,boardThickness:18,rubberThickness:8,totalGymWeightKg:36,
+    bays:[{id:'rope',label:'缓降绳包',side:'left',floor:56,ceiling:lower(572),netHeight:516-heightReduction,envelope:[350,350,250]},
+      {id:'aid',label:'急救包',side:'left',floor:lower(628),ceiling:lower(928),netHeight:300,envelope:[400,320,220]},
+      {id:'kettlebell',label:'16 kg 壶铃',side:'right',floor:56,ceiling:lower(572),netHeight:516-heightReduction,envelope:[222,172,252]},
+      {id:'dumbbells',label:'10 kg 哑铃 × 2',side:'right',floor:lower(628),ceiling:lower(928),netHeight:300,envelope:[320,136,118]}]};
+  const drawerPlan={count:2,perSide:1,start:lower(976),pitch:150,faceHeight:142,faceWidth:447,top:lower(1144),boxOuter:[405,126,350],inside:[381,118,326],travel:260};
+  const shelfPlan={regular:[{floor:lower(1144),ceiling:lower(1374),netHeight:230},{floor:lower(1392),ceiling:lower(1622),netHeight:230},{floor:lower(1640),ceiling:lower(1870),netHeight:230}],right:[{floor:lower(1144),ceiling:lower(1498),netHeight:354},{floor:lower(1516),ceiling:lower(1870),netHeight:354}],boardThickness:18};
+  const lowerCeiling=storagePlan.bays[0].ceiling,upperFloor=storagePlan.bays[1].floor,upperCeiling=storagePlan.bays[1].ceiling,middleBeamY=lowerCeiling+15,capBeamY=upperCeiling+15;
+  const slidePlan={frameWidth:1000,frameHeight:D.bodyHeight-16,frameBottom:8,frameTop:D.bodyHeight-8,frameCenterY:D.bodyHeight/2,frameZ:315,section:30,railLength:1000,travel:1000,assemblyDepth:580,frameColor:[.72,.77,.80],
+    rails:[{id:'upper',label:'上部主导轨',y:D.bodyHeight-12,bodyY:D.bodyHeight-15},{id:'lower',label:'下部防摆导轨',y:50,bodyY:15}],bodyAnchors:[-435,0,435],
+    arrangement:'后侧上下伸缩轨仍主承重；上部固定轨新增与顶部承梁的连接；中轨半行程，动轨与前框同位移；下连接预留调节间隙',rating:'结构及运动示意，实际滑轨型号和连接承载待按前框及面板总重选型'};
+  const pegPlan={frameWidth:1000,frameHeight:slidePlan.frameHeight,frameBottom:8,frameTop:slidePlan.frameTop,frameZ:395,section:30,railLength:1000,travel:1000,railZOffset:80,bodyAnchors:[-360,80,360],frameGap:50,assemblyDepth:660,
+    panelWidth:940,panelHeight:slidePlan.frameHeight-60,panelThickness:2,holeDiameter:8,holePitch:25,holeColumns:37,holeRows:67,
+    mount:'独立上下伸缩轨；上部固定桥随承梁下降98毫米，标高1835–1839毫米，下部桥仍从镜框下方绕过',coupling:'对齐后可拔插桥接片和插销联动；解除后各自移动'};
+  const midPlan={railCenterY:capBeamY-8,bodyBeamCenterY:capBeamY,railLength:1000,travel:1000,bodyAnchors:[-435,0,435],backStrip:{width:1000,height:60,thickness:6,centerZ:297},floatingJoint:{slotWidth:6,slotHeight:9,pinDiameter:5,verticalTravelEachWay:2},primaryRole:'镜框中段前后防摆约束',loadPath:'镜框两侧立柱—背面加强横板—浮动连接—中部伸缩轨—横梁安装板—主框架',rating:'辅助轨及浮动节点为构造占位，尚未选定货号；不计入新增额定竖向承载，不将三轨承重相加'};
+  const add=(a,b)=>a.map((x,i)=>x+b[i]),sub=(a,b)=>a.map((x,i)=>x-b[i]),scale=(a,k)=>a.map(x=>x*k);
+  const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+  const unit=a=>scale(a,1/(Math.hypot.apply(null,a)||1));
+  const aluminum=[.69,.73,.76],bracketColor=[.64,.68,.71],parts=[],triangles=[],opaqueTriangles=[],glassTriangles=[],edgeTriangles=[],figureTriangles=[],equipmentTriangles=[],drawerTriangles=[],slideFixedTriangles=[],slideMidTriangles=[],slideMovingTriangles=[],pegFixedTriangles=[],pegMidTriangles=[],pegMovingTriangles=[],pegPanelTriangles=[],mirrorTriangles=[],linkTriangles=[],equipmentItems=[],drawers=[];
+  const extraTriangles={},extraBuffers={};
+  function part(name,type,meta){const p={name,type,meta:meta||{},tri:[]};parts.push(p);return p;}
+  function tri(p,a,b,c,n,color){
+    const t={p:[a,b,c],n:n||unit(cross(sub(b,a),sub(c,a))),color:color||aluminum,kind:p.type};
+    triangles.push(t);p.tri.push(t);
+    if(p.type==='header-cover'||p.type.startsWith('aux-')){(extraTriangles[p.type]||(extraTriangles[p.type]=[])).push(t);return;}
+    if(p.type==='acrylic')glassTriangles.push(t);else if(p.type==='acrylic-edge')edgeTriangles.push(t);else if(p.type==='figure')figureTriangles.push(t);else if(p.type==='equipment')equipmentTriangles.push(t);else if(p.type==='drawer')drawerTriangles.push(t);else if(p.type==='slide-fixed')slideFixedTriangles.push(t);else if(p.type==='slide-mid')slideMidTriangles.push(t);else if(p.type==='slide-moving')slideMovingTriangles.push(t);else if(p.type==='peg-fixed')pegFixedTriangles.push(t);else if(p.type==='peg-mid')pegMidTriangles.push(t);else if(p.type==='peg-moving')pegMovingTriangles.push(t);else if(p.type==='peg-panel')pegPanelTriangles.push(t);else if(p.type==='mirror-panel')mirrorTriangles.push(t);else if(p.type==='link')linkTriangles.push(t);else opaqueTriangles.push(t);
+  }
+  function quad(p,a,b,c,d,n,color){tri(p,a,b,c,n,color);tri(p,a,c,d,n,color);}
+  function box(name,center,size,color,type){
+    const p=part(name,type||'bracket',{center,size}),h=size.map(x=>x/2);
+    const v=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]].map(a=>a.map((x,i)=>center[i]+x*h[i]));
+    [[0,3,2,1],[4,5,6,7],[0,4,7,3],[1,2,6,5],[3,7,6,2],[0,1,5,4]].forEach(f=>quad(p,v[f[0]],v[f[1]],v[f[2]],v[f[3]],undefined,color));
+    return p;
+  }
+  const outline=[[-20,-20],[-4,-20],[-4,-16],[-7,-16],[-7,-11],[7,-11],[7,-16],[4,-16],[4,-20],[20,-20],
+    [20,-4],[16,-4],[16,-7],[11,-7],[11,7],[16,7],[16,4],[20,4],[20,20],
+    [4,20],[4,16],[7,16],[7,11],[-7,11],[-7,16],[-4,16],[-4,20],[-20,20],
+    [-20,4],[-16,4],[-16,7],[-11,7],[-11,-7],[-16,-7],[-16,-4],[-20,-4]].map(p=>p.map(x=>x*D.section/40));
+  function triangulate(poly){
+    const ids=poly.map((p,i)=>i),faces=[];
+    const area=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+    let guard=0;
+    while(ids.length>3&&guard++<poly.length*poly.length){
+      let clipped=false;
+      for(let i=0;i<ids.length;i++){
+        const ia=ids[(i+ids.length-1)%ids.length],ib=ids[i],ic=ids[(i+1)%ids.length];
+        const a=poly[ia],b=poly[ib],c=poly[ic];if(area(a,b,c)<=.00001)continue;
+        const blocked=ids.some(j=>j!==ia&&j!==ib&&j!==ic&&area(a,b,poly[j])>=-.00001&&area(b,c,poly[j])>=-.00001&&area(c,a,poly[j])>=-.00001);
+        if(blocked)continue;faces.push([ia,ib,ic]);ids.splice(i,1);clipped=true;break;
+      }
+      if(!clipped)throw Error('Profile cross-section could not be triangulated');
+    }
+    if(ids.length===3)faces.push(ids.slice());return faces;
+  }
+  const cap=triangulate(outline);
+  function extrude(p,polygon,a,b,u,color,faces){
+    const axis=unit(sub(b,a)),v=cross(axis,u);
+    const point=(at,p2)=>add(at,add(scale(u,p2[0]),scale(v,p2[1])));
+    for(let i=0;i<polygon.length;i++){
+      const j=(i+1)%polygon.length,A=polygon[i],B=polygon[j];
+      const n=unit(add(scale(u,B[1]-A[1]),scale(v,A[0]-B[0])));
+      quad(p,point(a,A),point(a,B),point(b,B),point(b,A),n,color);
+    }
+    for(const f of faces||triangulate(polygon)){
+      tri(p,point(a,polygon[f[2]]),point(a,polygon[f[1]]),point(a,polygon[f[0]]),scale(axis,-1),color);
+      tri(p,point(b,polygon[f[0]]),point(b,polygon[f[1]]),point(b,polygon[f[2]]),axis,color);
+    }
+  }
+  function profile(name,a,b,type,color){
+    const p=part(name,type||'profile',{start:a,end:b,length:Math.hypot.apply(null,sub(b,a)),section:D.section});
+    const axis=unit(sub(b,a)),u=Math.abs(axis[0])>.9?[0,1,0]:[1,0,0];
+    extrude(p,outline,a,b,u,color||aluminum,cap);return p;
+  }
+  const px=(D.width-D.section)/2,pz=(D.depth-D.section)/2;
+  for(const x of [-px,px])for(const z of [-pz,pz]){
+    profile('原柜体立柱',[x,0,z],[x,D.bodyHeight,z]);
+  }
+  for(const x of [-px,px])for(const z of [-235,395])profile('齐深展示层立柱',[x,D.bodyHeight,z],[x,D.height,z]);
+  for(const y of [D.section/2,D.bodyHeight-D.section/2,D.height-D.section/2]){
+    for(const z of y<D.bodyHeight?[-pz,pz]:[-235,395]){
+      if(y<D.bodyHeight){
+        profile('左列宽向横梁',[-px+D.section/2,y,z],[-D.section/2,y,z]);
+        profile('右列宽向横梁',[D.section/2,y,z],[px-D.section/2,y,z]);
+      }else profile('展示顶宽向横梁',[-px+D.section/2,y,z],[px-D.section/2,y,z]);
+    }
+    for(const x of [-px,px])profile('深向横梁',[x,y,-pz+D.section/2],[x,y,(y<D.bodyHeight?pz:395)-D.section/2]);
+  }
+  for(const x of [-485,0,485]){
+    box('轨道带深向承梁占位',[x,D.bodyHeight+45,80],[30,30,600],[.52,.59,.63]);
+    profile('原前立柱向上连接承梁短柱',[x,D.bodyHeight,235],[x,D.bodyHeight+D.trackBand,235]);
+    if(x===0)profile('原后中立柱向上连接承梁短柱',[x,D.bodyHeight,-235],[x,D.bodyHeight+D.trackBand,-235]);
+  }
+  for(const z of [263,343]){
+    box('轨道固定端宽向承梁占位',[0,D.bodyHeight+45,z],[940,30,30],[.52,.59,.63]);
+    for(const x of z===263?slidePlan.bodyAnchors:pegPlan.bodyAnchors)box('固定轨向上连接承梁板占位',[x,D.bodyHeight+20,z],[40,40,6],[.56,.62,.66],z===263?'slide-fixed':'peg-fixed');
+  }
+  box('可拆顶部前饰面',[0,D.bodyHeight+30,408],[940,60,4],[.68,.72,.74],'header-cover');
+  for(const x of [-498,498]){
+    box('可拆顶部侧饰面上段',[x,D.bodyHeight+45,80],[4,30,600],[.68,.72,.74],'header-cover');
+    for(const [a,b] of [[-220,255],[304,335]])box('可拆顶部侧饰面避轨下段',[x,D.bodyHeight+15,(a+b)/2],[4,30,b-a],[.68,.72,.74],'header-cover');
+  }
+  for(const z of [-pz,pz])profile('柜体中立柱',[0,0,z],[0,D.bodyHeight,z]);
+  for(const z of [-pz,pz]){
+    profile('左中层承重横梁',[-470,middleBeamY,z],[-15,middleBeamY,z]);
+    profile('右中层承重横梁',[15,middleBeamY,z],[470,middleBeamY,z]);
+    profile('底部上沿左横梁',[-470,capBeamY,z],[-15,capBeamY,z]);
+    profile('底部上沿右横梁',[15,capBeamY,z],[470,capBeamY,z]);
+  }
+  for(const x of [-485,0,485])profile('底部上沿深向横梁',[x,capBeamY,-220],[x,capBeamY,220]);
+  for(const side of [-1,1]){
+    const cx=side*242.5;
+    for(const y of [15,middleBeamY])for(const dx of [-212.5,0,212.5])
+      profile('层板下深向支承梁',[cx+dx,y,-220],[cx+dx,y,220]);
+  }
+  const boardColor=[.72,.72,.68],rubberColor=[.16,.18,.18];
+  for(const x of [-242.5,242.5]){
+    box('底部18毫米承托板',[x,39,0],[455,18,420],boardColor,'storage');
+    box('底部功能区上盖板',[x,storagePlan.height-9,0],[455,18,420],boardColor,'storage');
+    box('中层18毫米承托板',[x,lowerCeiling+39,0],[455,18,420],boardColor,'storage');
+    for(const y of [52,upperFloor-4])box('8毫米等高防滑垫',[x,y,0],[455,8,420],rubberColor,'storage');
+  }
+  box('底部中央隔板',[0,(56+upperCeiling)/2,0],[12,upperCeiling-56,420],[.77,.78,.76],'storage');
+  let dividerBottom=upperCeiling+30;
+  const supportLevels=shelfPlan.regular.slice(0,-1).concat(shelfPlan.right.slice(0,-1)).map(s=>s.ceiling).sort((a,b)=>a-b);
+  for(const next of supportLevels.map(y=>({cut:y-30,resume:y})).concat([{cut:D.bodyHeight-D.section,resume:D.bodyHeight-D.section}])){
+    if(next.cut>dividerBottom)box('中隔板分段避让层板侧梁',[0,(dividerBottom+next.cut)/2,0],[12,next.cut-dividerBottom,420],[.77,.78,.76],'storage');
+    dividerBottom=next.resume;
+  }
+  for(const level of shelfPlan.regular.slice(0,-1)){
+    for(const x of [-485,0])profile('左上层板侧边支承梁',[x,level.ceiling-15,-220],[x,level.ceiling-15,220]);
+    box('左上18毫米分层板',[-253,level.ceiling+9,0],[494,18,420],boardColor,'storage');
+  }
+  for(const level of shelfPlan.right.slice(0,-1)){
+    for(const x of [0,485])profile('右上层板侧边支承梁',[x,level.ceiling-15,-220],[x,level.ceiling-15,220]);
+    box('右上18毫米分层板',[253,level.ceiling+9,0],[494,18,420],boardColor,'storage');
+  }
+  for(const side of [-1,1]){
+    const cx=side*242.5;
+    const cabinetCenter=drawerPlan.start+drawerPlan.perSide*drawerPlan.pitch/2;
+    for(const dx of [-221.5,221.5])box('抽屉柜侧板',[cx+dx,cabinetCenter,0],[12,drawerPlan.perSide*drawerPlan.pitch,420],boardColor,'storage');
+    box('抽屉柜背板',[cx,cabinetCenter,-207],[431,drawerPlan.perSide*drawerPlan.pitch,6],boardColor,'storage');
+    box('抽屉区顶板',[cx,drawerPlan.top-9,0],[455,18,420],boardColor,'storage');
+    for(let level=0;level<drawerPlan.perSide;level++){
+      const bottom=drawerPlan.start+level*drawerPlan.pitch,first=parts.length;
+      box('抽屉底板',[cx,bottom+14,56],[405,8,350],[.73,.63,.47],'drawer');
+      for(const dx of [-196.5,196.5])box('抽屉箱侧板',[cx+dx,bottom+77,56],[12,118,350],[.73,.63,.47],'drawer');
+      for(const z of [-113,225])box('抽屉箱前后板',[cx,bottom+77,z],[381,118,12],[.73,.63,.47],'drawer');
+      box('抽屉面板',[cx,bottom+drawerPlan.pitch/2,240],[447,drawerPlan.faceHeight,18],[.73,.62,.44],'drawer');
+      box('抽屉内凹拉手',[cx,bottom+119,249.4],[90,6,.8],[.20,.22,.22],'drawer');
+      drawers.push({id:(side<0?'left':'right')+'-'+(level+1),side:side<0?'left':'right',level:level+1,bottom,top:bottom+drawerPlan.pitch,parts:parts.slice(first)});
+      for(const dx of [-209,209])box('抽屉滑轨占位',[cx+dx,bottom+drawerPlan.pitch/2,0],[13,20,350],bracketColor,'bracket');
+    }
+  }
+  function angleBracket(x,z,y,signY,depthDirection){
+    const signX=-Math.sign(x),signZ=-Math.sign(z);
+    const origin=depthDirection?[x,y,z+signZ*D.section/2]:[x+signX*D.section/2,y,z];
+    const along=depthDirection?[0,0,signZ]:[signX,0,0],vertical=[0,signY,0],normal=unit(cross(along,vertical));
+    const leg=30,width=22,thickness=3;
+    const center1=add(origin,add(scale(along,leg/2),scale(vertical,thickness/2)));
+    const center2=add(origin,add(scale(along,thickness/2),scale(vertical,leg/2)));
+    box('角连接件横腿',center1,depthDirection?[width,thickness,leg]:[leg,thickness,width],bracketColor);
+    box('角连接件竖腿',center2,depthDirection?[width,leg,thickness]:[thickness,leg,width],bracketColor);
+    const p=part('角连接件加强肋','bracket'),a=add(origin,scale(normal,-1)),b=add(origin,scale(normal,1));
+    extrude(p,[[0,0],[leg,0],[0,leg]],a,b,along,bracketColor,[[0,1,2]]);
+  }
+  for(const x of [-px,px])for(const joint of [[D.section,1],[D.bodyHeight-D.section,-1],[D.height-D.section,-1]])for(const z of joint[0]>D.bodyHeight?[-235,395]:[-pz,pz]){
+    angleBracket(x,z,joint[0],joint[1],false);angleBracket(x,z,joint[0],joint[1],true);
+  }
+  const floorTop=D.bodyHeight+D.trackBand+D.shelfThickness,clearTop=D.height-D.section,clearHeight=clearTop-floorTop;
+  const shelf=part('展示底板（四角避让立柱）','shelf');
+  const floorOutline=[[-470,-247],[470,-247],[470,-220],[497,-220],[497,380],[470,380],[470,407],[-470,407],[-470,380],[-497,380],[-497,-220],[-470,-220]].map(([x,z])=>[x,-z]).reverse();
+  extrude(shelf,floorOutline,[0,D.bodyHeight+D.trackBand,0],[0,floorTop,0],[1,0,0],[.82,.85,.87]);
+  const glassColor=[.60,.83,.88],glassEdgeColor=[.60,.78,.82],panelY=(floorTop+clearTop)/2;
+  for(const z of [-248,408])
+    box(z>0?'正面透明亚克力':'背面透明亚克力',[0,panelY,z],[D.width-2*D.section,clearHeight,D.acrylic],glassColor,'acrylic');
+  for(const x of [-D.width/2+D.acrylic/2,D.width/2-D.acrylic/2])
+    box(x>0?'右侧透明亚克力':'左侧透明亚克力',[x,panelY,80],[D.acrylic,clearHeight,600],glassColor,'acrylic');
+  box('顶部透明亚克力（内嵌顶框）',[0,clearTop+D.acrylic/2,80],[D.width-2*D.section,D.acrylic,600],glassColor,'acrylic');
+  for(const z of [-248,408])for(const y of [floorTop+.6,clearTop-.6])
+    box('前后亚克力板边缘',[0,y,z],[940,1.2,1.2],glassEdgeColor,'acrylic-edge');
+  for(const x of [-498,498])for(const y of [floorTop+.6,clearTop-.6])
+    box('侧面亚克力板边缘',[x,y,80],[1.2,1.2,600],glassEdgeColor,'acrylic-edge');
+  function ellipsoid(name,center,radii,color,segments,rings,type){
+    const p=part(name,type||'figure'),seg=segments||20,rs=rings||12;
+    const point=(i,j)=>{const a=i/seg*Math.PI*2,b=j/rs*Math.PI;return [center[0]+radii[0]*Math.cos(a)*Math.sin(b),center[1]+radii[1]*Math.cos(b),center[2]+radii[2]*Math.sin(a)*Math.sin(b)];};
+    const normal=(a,b,c)=>unit(a.map((x,i)=>((x+b[i]+c[i])/3-center[i])/(radii[i]*radii[i])));
+    for(let j=0;j<rs;j++)for(let i=0;i<seg;i++){
+      const a=point(i,j),b=point(i+1,j),c=point(i+1,j+1),d=point(i,j+1);
+      if(j>0)tri(p,a,b,c,normal(a,b,c),color);if(j<rs-1)tri(p,a,c,d,normal(a,c,d),color);
+    }
+    return p;
+  }
+  function cylinder(name,a,b,r,color,segments,type){
+    const p=part(name,type||'figure'),n=unit(sub(b,a)),u=unit(cross(n,Math.abs(n[1])>.9?[1,0,0]:[0,1,0])),v=cross(n,u),seg=segments||20;
+    for(let i=0;i<seg;i++){
+      const radial=t=>add(scale(u,Math.cos(t)*r),scale(v,Math.sin(t)*r));
+      const r1=radial(i/seg*Math.PI*2),r2=radial((i+1)/seg*Math.PI*2),a1=add(a,r1),a2=add(a,r2),b1=add(b,r1),b2=add(b,r2);
+      quad(p,a1,a2,b2,b1,unit(add(r1,r2)),color);tri(p,a,a2,a1,scale(n,-1),color);tri(p,b,b1,b2,n,color);
+    }
+    return p;
+  }
+  function slideChannel(name,y,height,z,type,color){
+    box(name+'腹板',[0,y,z],[slidePlan.railLength,height,3],color,type);
+    for(const side of [-1,1])box(name+'折边',[0,y+side*(height/2-1),z+4],[slidePlan.railLength,2,8],color,type);
+  }
+  for(const rail of slidePlan.rails){
+    slideChannel(rail.label+'固定轨',rail.y,76,263,'slide-fixed',[.46,.51,.55]);
+    slideChannel(rail.label+'中轨',rail.y,64,274,'slide-mid',[.59,.65,.69]);
+    slideChannel(rail.label+'动轨',rail.y,52,285,'slide-moving',[.71,.76,.80]);
+    for(const x of slidePlan.bodyAnchors){
+      box(rail.label+'主体安装转接板',[x,(rail.y+rail.bodyY)/2,252],[36,60,4],[.55,.61,.65],'slide-fixed');
+      box(rail.label+'固定轨安装间隔块',[x,rail.y,258.5],[18,18,9],[.48,.53,.56],'slide-fixed');
+      cylinder(rail.label+'主体槽位连接螺栓',[x,rail.bodyY,254],[x,rail.bodyY,257],4,[.30,.34,.36],14,'slide-fixed');
+      const frameY=rail.id==='upper'?slidePlan.frameTop-15:23;
+      box(rail.label+'动轨连接前框板',[x,(rail.y+frameY)/2,294.5],[28,55,3],[.57,.64,.68],'slide-moving');
+      box(rail.label+'前框安装间隔块',[x,frameY,298],[18,14,4],[.54,.60,.64],'slide-moving');
+      cylinder(rail.label+'前框连接螺栓',[x,frameY,296],[x,frameY,299],3.2,[.30,.34,.36],14,'slide-moving');
+      if(rail.id==='lower')box('下导轨竖向调节长孔占位',[x,rail.y,296.15],[4,12,.3],[.17,.20,.22],'slide-moving');
+    }
+    for(const x of [-496,496])box(rail.label+'端部限位占位',[x,rail.y,268],[8,24,4],[.24,.28,.31],'slide-fixed');
+  }
+  for(const x of [-485,485])profile('活动前框立柱',[x,slidePlan.frameBottom,slidePlan.frameZ],[x,slidePlan.frameTop,slidePlan.frameZ],'slide-moving',slidePlan.frameColor);
+  for(const y of [23,slidePlan.frameTop-15])profile('活动前框横梁',[-470,y,slidePlan.frameZ],[470,y,slidePlan.frameZ],'slide-moving',slidePlan.frameColor);
+  for(const x of [-470,470])for(const y of [38,slidePlan.frameTop-30]){
+    const sx=-Math.sign(x),sy=y<100?1:-1;
+    box('活动前框内角连接片',[x+sx*20,y+sy*1.5,328.5],[40,3,3],[.58,.65,.69],'slide-moving');
+    box('活动前框内角连接片',[x+sx*1.5,y+sy*20,328.5],[3,40,3],[.58,.65,.69],'slide-moving');
+  }
+  box('镜子背板占位',[0,slidePlan.frameCenterY,307],[940,pegPlan.panelHeight,8],[.43,.47,.48],'slide-moving');
+  box('镜面',[0,slidePlan.frameCenterY,313.5],[940,pegPlan.panelHeight,5],[.73,.83,.88],'mirror-panel');
+  slideChannel('中部防摆辅助轨固定段',midPlan.railCenterY,76,263,'aux-fixed',[.30,.44,.54]);
+  slideChannel('中部防摆辅助轨中间段',midPlan.railCenterY,64,274,'aux-mid',[.41,.56,.64]);
+  slideChannel('中部防摆辅助轨活动段',midPlan.railCenterY,52,285,'aux-moving',[.53,.67,.73]);
+  for(const x of midPlan.bodyAnchors){
+    box('中部辅助轨主体安装板',[x,(midPlan.railCenterY+capBeamY)/2,252],[36,40,4],[.32,.45,.54],'aux-fixed');
+    box('中部辅助轨安装间隔块',[x,midPlan.railCenterY,258.5],[18,18,9],[.35,.47,.55],'aux-fixed');
+    cylinder('中部辅助轨主体槽位螺栓',[x,capBeamY,254],[x,capBeamY,257],4,[.24,.30,.34],14,'aux-fixed');
+    cylinder('中部浮动肩轴',[x,midPlan.railCenterY,292],[x,midPlan.railCenterY,302.3],2.5,[.65,.70,.73],16,'aux-moving');
+    cylinder('中部肩轴后限位垫圈',[x,midPlan.railCenterY,291.8],[x,midPlan.railCenterY,293.8],4,[.27,.34,.39],16,'aux-moving');
+    cylinder('中部肩轴前限位垫圈',[x,midPlan.railCenterY,300.2],[x,midPlan.railCenterY,302.2],4,[.27,.34,.39],16,'aux-moving');
+  }
+  const stripSpans=[[-500,-438],[-432,-3],[3,432],[438,500]];
+  for(const [a,b] of stripSpans)box('镜框背面加强横板',[.5*(a+b),midPlan.railCenterY,297],[b-a,60,6],[.36,.51,.61],'aux-moving');
+  for(const x of midPlan.bodyAnchors)for(const sy of [-1,1])box('镜框加强横板浮动槽上下边',[x,midPlan.railCenterY+sy*17.25,297],[6,25.5,6],[.36,.51,.61],'aux-moving');
+  for(const x of [-485,485])for(const y of [midPlan.railCenterY-20,midPlan.railCenterY+20])cylinder('加强横板连接镜框槽位螺栓',[x,y,291],[x,y,306],3,[.25,.31,.35],14,'aux-moving');
+  for(const rail of slidePlan.rails){
+    const high=rail.id==='upper',bridgeY=high?D.bodyHeight+35:3;
+    slideChannel('洞洞板'+rail.label+'固定轨',rail.y,76,343,'peg-fixed',[.48,.53,.57]);
+    slideChannel('洞洞板'+rail.label+'中轨',rail.y,64,354,'peg-mid',[.63,.67,.69]);
+    slideChannel('洞洞板'+rail.label+'动轨',rail.y,52,365,'peg-moving',[.74,.77,.78]);
+    for(const x of pegPlan.bodyAnchors){
+      box('洞洞板主体安装板',[x,rail.bodyY,252],[30,30,4],[.55,.61,.65],'peg-fixed');
+      box('洞洞板绕过镜框固定桥',[x,bridgeY,298.5],[24,4,89],[.53,.59,.63],'peg-fixed');
+      box('洞洞板外轨固定立板',[x,(bridgeY+rail.y)/2,340],[24,Math.abs(bridgeY-rail.y)+4,3],[.53,.59,.63],'peg-fixed');
+      cylinder('洞洞板主体槽位螺栓',[x,rail.bodyY,254],[x,rail.bodyY,257],4,[.30,.34,.36],14,'peg-fixed');
+    }
+    for(const x of slidePlan.bodyAnchors){
+      const frameY=high?slidePlan.frameTop-15:23;
+      box('洞洞板动轨前框连接板',[x,(rail.y+frameY)/2,374.5],[28,55,3],[.61,.66,.68],'peg-moving');
+      box('洞洞板前框安装间隔块',[x,frameY,378],[18,14,4],[.57,.62,.64],'peg-moving');
+      cylinder('洞洞板前框连接螺栓',[x,frameY,376],[x,frameY,379],3.2,[.30,.34,.36],14,'peg-moving');
+    }
+    for(const x of [-496,496])box('洞洞板导轨端部限位',[x,rail.y,348],[8,24,4],[.24,.28,.31],'peg-fixed');
+  }
+  for(const x of [-485,485])profile('洞洞板框立柱',[x,8,395],[x,pegPlan.frameTop,395],'peg-moving',[.75,.77,.77]);
+  for(const y of [23,pegPlan.frameTop-15])profile('洞洞板框横梁',[-470,y,395],[470,y,395],'peg-moving',[.75,.77,.77]);
+  box('洞洞板穿孔铝板',[0,slidePlan.frameCenterY,395],[940,pegPlan.panelHeight,2],[.83,.81,.73],'peg-panel');
+  for(const y of [lower(650),lower(1250)]){
+    box('镜框联动安装耳',[485,y,334],[18,16,8],[.53,.59,.62],'slide-moving');
+    box('洞洞板联动安装耳',[485,y,376],[18,16,8],[.53,.59,.62],'peg-moving');
+    box('可拔联动桥接片',[485,y,355],[12,6,42],[.56,.62,.66],'link');
+    for(const z of [334,376])cylinder('联动插销',[485,y-10,z],[485,y+10,z],3,[.30,.36,.39],14,'link');
+  }
+  function slideState(value,layer){
+    const plan=layer==='peg'?pegPlan:slidePlan,x=Math.max(0,Math.min(plan.travel,value===undefined?(layer==='peg'?state.pegSlide:state.slide):value));
+    return {offset:x,fixed:[-500,500],middle:[-500+x/2,500+x/2],moving:[-500+x,500+x],fixedMiddleOverlap:1000-x/2,middleMovingOverlap:1000-x/2,frameBounds:{min:[-500+x,plan.frameBottom,plan.frameZ-15],max:[500+x,plan.frameTop,plan.frameZ+15]}};
+  }
+  function equipment(id,name,center,size,weightKg,build){
+    const first=parts.length;build();const item={id,name,center,size,weightKg,partNames:parts.slice(first).map(p=>p.name)};
+    item.parts=parts.slice(first);equipmentItems.push(item);
+  }
+  equipment('rope','缓降绳包预留',[-242.5,181,0],[350,250,350],null,()=>{
+    box('缓降绳包主体',[-242.5,172,0],[350,232,350],[.79,.40,.20],'equipment');
+    box('缓降绳包顶盖',[-242.5,292,0],[350,8,350],[.69,.33,.16],'equipment');
+    for(const x of [-330,-155])box('绳包织带',[x,176,174],[20,210,2],[.22,.24,.22],'equipment');
+    cylinder('绳包提把左侧',[-282.5,296,0],[-282.5,302,0],4,[.20,.22,.21],12,'equipment');
+    cylinder('绳包提把右侧',[-202.5,296,0],[-202.5,302,0],4,[.20,.22,.21],12,'equipment');
+    cylinder('绳包提把',[-282.5,302,0],[-202.5,302,0],4,[.20,.22,.21],12,'equipment');
+  });
+  equipment('aid','急救包预留',[-242.5,upperFloor+110,0],[400,220,320],null,()=>{
+    box('急救包主体',[-242.5,upperFloor+90,0],[400,180,320],[.20,.43,.34],'equipment');
+    box('急救包前袋',[-242.5,upperFloor+80,159],[260,110,2],[.17,.35,.28],'equipment');
+    box('急救标识横线',[-242.5,upperFloor+80,159.5],[64,18,1],[.93,.95,.87],'equipment');
+    box('急救标识竖线',[-242.5,upperFloor+80,159.5],[18,64,1],[.93,.95,.87],'equipment');
+    for(const x of [-292.5,-192.5])box('急救包提把立边',[x,upperFloor+196,0],[10,32,10],[.14,.25,.21],'equipment');
+    box('急救包提把',[-242.5,upperFloor+215,0],[110,10,10],[.14,.25,.21],'equipment');
+  });
+  equipment('kettlebell','16 kg 壶铃',[242.5,182,95],[222,252,172],16,()=>{
+    ellipsoid('壶铃主体',[242.5,142,95],[111,86,86],[.16,.18,.18],32,16,'equipment');
+    const handleColor=[.25,.27,.27];
+    for(let i=0;i<20;i++){
+      const point=t=>[242.5+76*Math.cos(t),223+67*Math.sin(t),95];
+      cylinder('壶铃弧形提手',point(i/20*Math.PI),point((i+1)/20*Math.PI),18,handleColor,12,'equipment');
+    }
+    ellipsoid('壶铃提手顶部圆角',[242.5,290,95],[18,18,18],handleColor,16,8,'equipment');
+    for(const s of [-1,1])cylinder('壶铃提手根部',[242.5+s*76,223,95],[242.5+s*59,194,95],18,handleColor,14,'equipment');
+  });
+  for(const z of [-95,105])equipment('dumbbell-'+z,'10 kg 六角哑铃',[242.5,upperFloor+59,z],[320,118,136],10,()=>{
+    cylinder('哑铃握杆',[177.5,upperFloor+59,z],[307.5,upperFloor+59,z],16,[.61,.63,.63],20,'equipment');
+    const hex=Array.from({length:6},(_,i)=>[-59/Math.sin(Math.PI/3)*Math.sin(i*Math.PI/3),68*Math.cos(i*Math.PI/3)]);
+    for(const side of [-1,1]){
+      const a=side<0?82.5:307.5,b=side<0?177.5:402.5,p=part('哑铃六角头','equipment');
+      extrude(p,hex,[a,upperFloor+59,z],[b,upperFloor+59,z],[0,1,0],[.13,.15,.15]);
+    }
+  });
+  box('后排展示增高台',[0,floorTop+12.5,-112],[620,25,164],[.76,.79,.79],'figure');
+  const figures=[];
+  function doll(x,z,base,coat,hair){
+    figures.push({x,z,base,height:267});
+    const skin=[.94,.75,.60],shoe=[.84,.80,.70],eye=[.18,.13,.11];
+    cylinder('手办圆形底座',[x,base,z],[x,base+10,z],62,[.79,.75,.65],32);
+    for(const s of [-1,1]){
+      ellipsoid('手办鞋',[x+s*20,base+22,z+15],[19,11,28],shoe);
+      cylinder('手办腿',[x+s*19,base+27,z],[x+s*19,base+63,z],9,[.92,.87,.76]);
+    }
+    ellipsoid('手办上衣',[x,base+105,z],[47,49,34],coat);
+    for(const s of [-1,1]){
+      cylinder('手办衣袖',[x+s*36,base+125,z],[x+s*52,base+99,z],12,coat);
+      ellipsoid('手办手',[x+s*53,base+91,z+2],[12,15,12],skin);
+    }
+    ellipsoid('手办头发',[x,base+190,z],[60,58,48],hair);
+    ellipsoid('手办脸',[x,base+188,z+17],[49,45,36],skin);
+    for(const s of [-1,1]){
+      ellipsoid('手办装饰耳',[x+s*43,base+243,z],[15,24,13],hair);
+      ellipsoid('手办装饰耳内侧',[x+s*43,base+245,z+11],[8,13,3],[.85,.56,.47]);
+      ellipsoid('手办眼睛',[x+s*17,base+191,z+50],[8,11,4],eye,16,10);
+      ellipsoid('手办眼睛高光',[x+s*17-2,base+195,z+54.5],[2.2,3.2,1],[.98,.96,.87],12,8);
+      ellipsoid('手办脸颊',[x+s*30,base+178,z+46],[7,3.5,1.3],[.90,.53,.45],12,8);
+    }
+    for(const dx of [-28,0,28])ellipsoid('手办刘海',[x+dx,base+225,z+40],[20,15,12],hair);
+    ellipsoid('手办嘴',[x,base+175,z+51.5],[4,2,1.4],[.58,.28,.20],12,8);
+    for(const s of [-1,1])cylinder('手办衣服抽绳',[x+s*9,base+142,z+31],[x+s*9,base+117,z+35],1.8,[.94,.88,.73],10);
+  }
+  doll(-300,104,floorTop,[.82,.56,.35],[.62,.42,.27]);
+  doll(0,104,floorTop,[.85,.76,.58],[.72,.53,.33]);
+  doll(300,104,floorTop,[.55,.68,.59],[.57,.38,.26]);
+  doll(-155,-100,floorTop+25,[.79,.60,.46],[.67,.47,.31]);
+  doll(155,-100,floorTop+25,[.67,.62,.73],[.59,.40,.28]);
+  function perspective(fov,aspect,near,far){
+    const f=1/Math.tan(fov/2),nf=1/(near-far);
+    return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0]);
+  }
+  function lookAt(eye,target,up){
+    const z=unit(sub(eye,target)),x=unit(cross(up||[0,1,0],z)),y=cross(z,x);
+    return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1]);
+  }
+  function multiply(a,b){
+    const out=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)for(let k=0;k<4;k++)out[c*4+r]+=a[k*4+r]*b[c*4+k];return out;
+  }
+  const canvas=q('[data-scene]');let gl=null,program,buffer,connectionBodyBuffer,connectionSlideBuffer,figureBuffer,equipmentBuffer,drawerBuffer,slideFixedBuffer,slideMidBuffer,slideMovingBuffer,pegFixedBuffer,pegMidBuffer,pegMovingBuffer,pegPanelBuffer,mirrorBuffer,linkBuffer,edgeBuffer,clearBuffer,floorBuffer,locations={},request=0,lost=false,dark=false;
+  function shader(type,source){
+    const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;
+  }
+  function upload(data){
+    const array=[];data.forEach(t=>t.p.forEach(p=>array.push.apply(array,p.concat(t.n,t.color))));
+    const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(array),gl.STATIC_DRAW);
+    return {buffer:b,count:data.length*3};
+  }
+  function start(){
+    try{
+      gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:true});if(!gl)throw Error('WebGL unavailable');
+      const vs='attribute vec3 aPosition;attribute vec3 aNormal;attribute vec3 aColor;uniform mat4 uVP;uniform vec3 uOffset;varying vec3 vPosition;varying vec3 vNormal;varying vec3 vColor;void main(){vPosition=aPosition+uOffset;vNormal=aNormal;vColor=aColor;gl_Position=uVP*vec4(vPosition,1.0);}';
+      const fs=[
+        'precision highp float;varying vec3 vPosition;varying vec3 vNormal;varying vec3 vColor;uniform vec3 uEye;uniform vec3 uOffset;uniform float uFloor;uniform float uDark;uniform float uGlass;uniform float uFigure;uniform float uMirror;uniform float uPeg;',
+        'void main(){if(uFloor>.5){float k=exp(-(vPosition.x*vPosition.x/260000.0+vPosition.z*vPosition.z/75000.0));gl_FragColor=vec4(vec3(uDark>.5?.75:.12),k*(uDark>.5?.12:.14));return;}',
+        'if(uPeg>.5){vec2 p=vec2(vPosition.x-uOffset.x,vPosition.y-'+slidePlan.frameCenterY.toFixed(1)+');vec2 q=mod(p+12.5,25.0)-12.5;if(abs(p.x)<455.0&&abs(p.y)<'+(pegPlan.panelHeight/2-15).toFixed(1)+'&&dot(q,q)<16.0)discard;}',
+        'vec3 n=normalize(vNormal);vec3 light=normalize(vec3(-.6,1.0,.7));vec3 view=normalize(uEye-vPosition);float diffuse=max(dot(n,light),0.0);float fill=max(dot(n,normalize(vec3(.8,.3,-.4))),0.0);float spec=pow(max(dot(n,normalize(light+view)),0.0),48.0);',
+        'if(uMirror>.5){vec3 r=reflect(-view,n);float sky=clamp(r.y*.7+.60,0.0,1.0);vec3 c=mix(vec3(.29,.38,.44),vec3(.89,.94,.96),sky);float band=exp(-pow((r.x+.27)*12.0,2.0));c=mix(c,vec3(.98,.99,1.0),band*.65);gl_FragColor=vec4(c+spec*.18,1.0);return;}',
+        'if(uGlass>.5){float edge=pow(1.0-abs(dot(n,view)),3.0);gl_FragColor=vec4(mix(vColor,vec3(.95,.98,1.0),.30)+spec*.12,.035+edge*.10);return;}',
+        'vec3 col=vColor*(.48+.38*diffuse+.18*fill);float fresnel=pow(1.0-max(dot(n,view),0.0),3.0);if(uFigure>.5){col=vColor*(.64+.28*diffuse+.10*fill)+spec*.045;}else{col=mix(col,vec3(.92,.94,.96),fresnel*.16)+spec*.38;}gl_FragColor=vec4(col,1.0);}'
+      ].join('');
+      program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vs));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);
+      if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));
+      gl.useProgram(program);['aPosition','aNormal','aColor'].forEach(n=>locations[n]=gl.getAttribLocation(program,n));
+      ['uVP','uEye','uFloor','uDark','uGlass','uFigure','uOffset','uMirror','uPeg'].forEach(n=>locations[n]=gl.getUniformLocation(program,n));
+      buffer=upload(opaqueTriangles);figureBuffer=upload(figureTriangles);equipmentBuffer=upload(equipmentTriangles);drawerBuffer=upload(drawerTriangles);edgeBuffer=upload(edgeTriangles);clearBuffer=upload(glassTriangles);
+      slideFixedBuffer=upload(slideFixedTriangles);slideMidBuffer=upload(slideMidTriangles);slideMovingBuffer=upload(slideMovingTriangles);
+      connectionBodyBuffer=upload(opaqueTriangles.filter(t=>t.kind!=='shelf'));
+      connectionSlideBuffer=upload(parts.filter(p=>p.type==='slide-moving'&&p.name!=='镜子背板占位').flatMap(p=>p.tri));
+      pegFixedBuffer=upload(pegFixedTriangles);pegMidBuffer=upload(pegMidTriangles);pegMovingBuffer=upload(pegMovingTriangles);pegPanelBuffer=upload(pegPanelTriangles);mirrorBuffer=upload(mirrorTriangles);linkBuffer=upload(linkTriangles);
+      for(const [kind,list] of Object.entries(extraTriangles))extraBuffers[kind]=upload(list);
+      const floor=[{p:[[-1300,-2,-900],[1300,-2,-900],[1300,-2,900]],n:[0,1,0],color:[0,0,0]},
+        {p:[[-1300,-2,-900],[1300,-2,900],[-1300,-2,900]],n:[0,1,0],color:[0,0,0]}];floorBuffer=upload(floor);
+      gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);q('[data-error]').hidden=true;
+    }catch(e){root.dataset.error=e.message;q('[data-error]').hidden=false;gl=null;}
+  }
+  function drawBuffer(b){
+    gl.bindBuffer(gl.ARRAY_BUFFER,b.buffer);
+    [['aPosition',0],['aNormal',12],['aColor',24]].forEach(a=>{gl.enableVertexAttribArray(locations[a[0]]);gl.vertexAttribPointer(locations[a[0]],3,gl.FLOAT,false,36,a[1]);});
+    gl.drawArrays(gl.TRIANGLES,0,b.count);
+  }
+  function drawContents(eye,target,closedDrawers,bodyOnly){
+    const midCut=state.focus==='mid-connection'&&!bodyOnly,cut=(state.focus==='connection'||midCut)&&!bodyOnly;
+    gl.uniform3f(locations.uOffset,0,0,0);gl.uniform1f(locations.uFloor,0);gl.uniform1f(locations.uGlass,0);gl.uniform1f(locations.uFigure,0);gl.uniform1f(locations.uMirror,0);gl.uniform1f(locations.uPeg,0);gl.depthMask(true);drawBuffer(cut?connectionBodyBuffer:buffer);
+    if(state.header&&extraBuffers['header-cover'])drawBuffer(extraBuffers['header-cover']);
+    gl.uniform1f(locations.uFigure,1);gl.uniform3f(locations.uOffset,0,0,state.drawers&&!closedDrawers?drawerPlan.travel:0);drawBuffer(drawerBuffer);gl.uniform3f(locations.uOffset,0,0,0);gl.uniform1f(locations.uFigure,0);
+    if(state.figures&&!cut){gl.uniform1f(locations.uFigure,1);drawBuffer(figureBuffer);gl.uniform1f(locations.uFigure,0);}
+    if(state.equipment&&!cut){gl.uniform1f(locations.uFigure,1);drawBuffer(equipmentBuffer);gl.uniform1f(locations.uFigure,0);}
+    if(!bodyOnly){
+      if(state.midSupport){
+        gl.uniform3f(locations.uOffset,0,0,0);drawBuffer(extraBuffers['aux-fixed']);
+        gl.uniform3f(locations.uOffset,state.slide/2,0,0);drawBuffer(extraBuffers['aux-mid']);
+        gl.uniform3f(locations.uOffset,state.slide,0,0);drawBuffer(extraBuffers['aux-moving']);gl.uniform3f(locations.uOffset,0,0,0);
+      }
+      drawBuffer(slideFixedBuffer);
+      gl.uniform3f(locations.uOffset,state.slide/2,0,0);drawBuffer(slideMidBuffer);
+      gl.uniform3f(locations.uOffset,state.slide,0,0);drawBuffer(cut?connectionSlideBuffer:slideMovingBuffer);
+      if(!cut){gl.uniform1f(locations.uMirror,1);drawBuffer(mirrorBuffer);gl.uniform1f(locations.uMirror,0);}
+      if(state.linked&&!midCut&&Math.abs(state.slide-state.pegSlide)<.1)drawBuffer(linkBuffer);
+      if(!midCut){
+      gl.uniform3f(locations.uOffset,0,0,0);drawBuffer(pegFixedBuffer);
+      gl.uniform3f(locations.uOffset,state.pegSlide/2,0,0);drawBuffer(pegMidBuffer);
+      gl.uniform3f(locations.uOffset,state.pegSlide,0,0);drawBuffer(pegMovingBuffer);
+      if(!cut){gl.uniform1f(locations.uPeg,1);gl.uniform1f(locations.uFigure,1);drawBuffer(pegPanelBuffer);gl.uniform1f(locations.uPeg,0);gl.uniform1f(locations.uFigure,0);}gl.uniform3f(locations.uOffset,0,0,0);
+      }
+    }
+    if(state.cover&&!cut){
+      drawBuffer(edgeBuffer);
+      const direction=unit(sub(eye,target)),depth=t=>t.p.reduce((s,p)=>s+dot(p,direction),0)/3;
+      const sorted=glassTriangles.slice().sort((a,b)=>depth(a)-depth(b)),data=[];
+      sorted.forEach(t=>t.p.forEach(p=>data.push.apply(data,p.concat(t.n,t.color))));
+      gl.bindBuffer(gl.ARRAY_BUFFER,clearBuffer.buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.DYNAMIC_DRAW);
+      gl.depthMask(false);gl.uniform1f(locations.uGlass,1);drawBuffer(clearBuffer);gl.depthMask(true);gl.uniform1f(locations.uGlass,0);
+    }
+  }
+  function camera(w,h){
+    let minX=-500,maxX=1500,minY=0,maxY=state.focus==='bottom'?drawerPlan.top+30:D.height,minZ=-250,maxZ=state.drawers?510:410;
+    if(state.focus==='display'){maxX=500;minY=D.bodyHeight-D.section;maxZ=410;}
+    if(state.focus==='connection'){
+      minX=-180;maxX=320;minY=D.bodyHeight-70;maxY=D.bodyHeight+90;minZ=190;maxZ=425;
+    }
+    if(state.focus==='mid-connection'){
+      const cx=state.slide/2;minX=cx-310;maxX=cx+310;minY=midPlan.railCenterY-70;maxY=midPlan.railCenterY+70;minZ=225;maxZ=325;
+    }
+    const target=[(minX+maxX)/2,(minY+maxY)/2,(minZ+maxZ)/2],n=[Math.sin(state.yaw)*Math.cos(state.pitch),Math.sin(state.pitch),Math.cos(state.yaw)*Math.cos(state.pitch)];
+    const right=unit(cross([0,1,0],n)),up=cross(n,right),tan=Math.tan(Math.PI/10),aspect=w/h;let distance=0;
+    for(const x of [minX,maxX])for(const y of [minY,maxY])for(const z of [minZ,maxZ]){
+      const p=sub([x,y,z],target);
+      distance=Math.max(distance,dot(p,n)+Math.max(Math.abs(dot(p,right))/(tan*aspect),Math.abs(dot(p,up))/tan));
+    }
+    const eye=add(target,scale(n,(distance+150)*state.zoom));
+    return {eye,target,vp:multiply(perspective(Math.PI/5,aspect,20,20000),lookAt(eye,target))};
+  }
+  function render(){
+    request=0;if(!gl||lost||state.mode!=='model')return;
+    const rect=canvas.getBoundingClientRect();if(rect.width<1)return;
+    const dpr=Math.min(window.devicePixelRatio||1,2),w=Math.round(rect.width*dpr),h=Math.round(rect.height*dpr);
+    if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}gl.viewport(0,0,w,h);
+    gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(program);
+    const c=camera(w,h);gl.uniformMatrix4fv(locations.uVP,false,c.vp);gl.uniform3fv(locations.uEye,new Float32Array(c.eye));gl.uniform1f(locations.uDark,dark?1:0);
+    if(state.focus==='whole'){gl.uniform1f(locations.uFloor,1);gl.depthMask(false);drawBuffer(floorBuffer);gl.depthMask(true);}
+    drawContents(c.eye,c.target);root.dataset.rendered='true';
+  }
+  function redraw(){if(!request)request=requestAnimationFrame(render);}
+  function color(name){
+    const el=document.createElement('span');el.style.color='var('+name+')';root.appendChild(el);const result=getComputedStyle(el).color;el.remove();return result;
+  }
+  function dimensions(){
+    qa('[data-dimension]').forEach(diagram=>{
+      const view=diagram.dataset.dimension,w=diagram.getBoundingClientRect().width,h=diagram.getBoundingClientRect().height;if(w<1)return;
+      const dpr=Math.min(window.devicePixelRatio||1,2);diagram.width=Math.round(w*dpr);diagram.height=Math.round(h*dpr);
+      const ctx=diagram.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+      const width=view==='side'?D.displayDepth:D.width,height=view==='top'?D.displayDepth:D.height,left=53,right=view==='top'?18:45,top=42,bottom=25;
+      const s=Math.min((w-left-right)/width,(h-top-bottom)/height),ox=left+(w-left-right-width*s)/2,oy=top+(h-top-bottom-height*s)/2;
+      if(gl&&!lost){
+        const rw=Math.max(1,Math.round(width*s*dpr)),rh=Math.max(1,Math.round(height*s*dpr));canvas.width=rw;canvas.height=rh;
+        gl.viewport(0,0,rw,rh);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(program);
+        const target=[0,D.height/2,80],eye=view==='front'?[0,D.height/2,5000]:view==='back'?[0,D.height/2,-5000]:view==='side'?[5000,D.height/2,80]:[0,D.height/2+5000,80];
+        const ortho=new Float32Array([2/width,0,0,0,0,2/height,0,0,0,0,-2/19980,0,0,0,-20020/19980,1]);
+        gl.uniformMatrix4fv(locations.uVP,false,multiply(ortho,lookAt(eye,target,view==='top'?[0,0,-1]:undefined)));
+        gl.uniform3fv(locations.uEye,new Float32Array(eye));gl.uniform1f(locations.uDark,dark?1:0);drawContents(eye,target,true,true);
+        ctx.drawImage(canvas,ox,oy,width*s,height*s);
+      }else{
+        const project=p=>view==='front'?[p[0]+D.width/2,D.height-p[1]]:view==='back'?[D.width/2-p[0],D.height-p[1]]:view==='side'?[410-p[2],D.height-p[1]]:[p[0]+D.width/2,p[2]+250];
+        const normals={front:[0,0,1],back:[0,0,-1],side:[1,0,0],top:[0,1,0]},n=normals[view];
+        const visible=t=>!t.kind.startsWith('slide-')&&!t.kind.startsWith('peg-')&&!t.kind.startsWith('aux-')&&t.kind!=='mirror-panel'&&t.kind!=='link'&&(state.header||t.kind!=='header-cover')&&(state.cover||(t.kind!=='acrylic'&&t.kind!=='acrylic-edge'))&&(state.figures||t.kind!=='figure')&&(state.equipment||t.kind!=='equipment');
+        const draw=triangles.filter(t=>visible(t)&&dot(t.n,n)>.001).slice().sort((a,b)=>a.p.reduce((s,p)=>s+dot(p,n),0)-b.p.reduce((s,p)=>s+dot(p,n),0));
+        ctx.fillStyle=color('--muted-foreground');for(const t of draw){ctx.globalAlpha=t.kind==='acrylic'?.05:1;ctx.beginPath();t.p.forEach((p,i)=>{const a=project(p);if(i)ctx.lineTo(ox+a[0]*s,oy+a[1]*s);else ctx.moveTo(ox+a[0]*s,oy+a[1]*s);});ctx.closePath();ctx.fill();}ctx.globalAlpha=1;
+      }
+      const style=getComputedStyle(root);ctx.font='400 '+(parseFloat(style.fontSize)||14)+'px '+style.fontFamily;ctx.textBaseline='middle';ctx.textAlign='center';
+      ctx.strokeStyle=color('--muted-foreground');ctx.fillStyle=color('--foreground');ctx.lineWidth=1;
+      const x1=ox,x2=ox+width*s,y1=oy,y2=oy+height*s;
+      const line=(a,b,c,d)=>{ctx.beginPath();ctx.moveTo(a,b);ctx.lineTo(c,d);ctx.stroke();};
+      const tick=(x,y)=>line(x-3,y+3,x+3,y-3);
+      line(x1,y1-5,x1,y1-29);line(x2,y1-5,x2,y1-29);line(x1,y1-20,x2,y1-20);tick(x1,y1-20);tick(x2,y1-20);
+      const label=ctx.measureText(String(width)).width+12;ctx.clearRect((x1+x2-label)/2,y1-29,label,18);ctx.fillText(String(width),(x1+x2)/2,y1-20);
+      line(x1-5,y1,x1-32,y1);line(x1-5,y2,x1-32,y2);line(x1-25,y1,x1-25,y2);tick(x1-25,y1);tick(x1-25,y2);
+      ctx.save();ctx.translate(x1-25,(y1+y2)/2);ctx.rotate(-Math.PI/2);const len=ctx.measureText(String(height)).width+12;ctx.clearRect(-len/2,-9,len,18);ctx.fillText(String(height),0,0);ctx.restore();
+      if(view!=='top'){
+        const split=oy+D.displayHeight*s,dx=x2+22;
+        for(const y of [y1,split,y2]){line(x2+4,y,dx+6,y);tick(dx,y);}line(dx,y1,dx,y2);
+        for(const segment of [[y1,split,D.displayHeight],[split,y2,D.bodyHeight]]){
+          ctx.save();ctx.translate(dx,(segment[0]+segment[1])/2);ctx.rotate(-Math.PI/2);
+          const len=ctx.measureText(String(segment[2])).width+10;ctx.clearRect(-len/2,-9,len,18);ctx.fillText(String(segment[2]),0,0);ctx.restore();
+        }
+      }
+      ctx.fillStyle=color('--muted-foreground');ctx.textAlign='right';ctx.fillText('mm',w-4,h-10);
+    });
+  }
+  function bottomDiagrams(){
+    const fg=color('--foreground'),neutral=color('--muted-foreground'),surface=color('--muted'),safe=color('--viz-series-2'),gym=color('--viz-series-1');
+    qa('[data-bottom-diagram]').forEach(diagram=>{
+      const view=diagram.dataset.bottomDiagram,w=diagram.getBoundingClientRect().width,h=diagram.getBoundingClientRect().height;if(w<1)return;
+      const dpr=Math.min(window.devicePixelRatio||1,2);diagram.width=Math.round(w*dpr);diagram.height=Math.round(h*dpr);
+      const c=diagram.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,w,h);
+      const font=getComputedStyle(root).fontFamily;c.font='400 12px '+font;c.textAlign='center';c.textBaseline='middle';c.lineWidth=1;
+      const height=view==='front'?storagePlan.height:500,left=42,right=12,top=56,bottom=24,s=Math.min((w-left-right)/1000,(h-top-bottom)/height),ox=left+(w-left-right-1000*s)/2,oy=top+(h-top-bottom-height*s)/2;
+      const X=x=>ox+(x+500)*s,Y=y=>oy+(view==='front'?storagePlan.height-y:y+250)*s;
+      const line=(x1,y1,x2,y2)=>{c.strokeStyle=neutral;c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();};
+      const label=(text,x,y)=>{c.fillStyle=fg;c.fillText(text,x,y);};
+      const rect=(x,y,width,height,fill,alpha)=>{c.globalAlpha=alpha===undefined?1:alpha;c.fillStyle=fill;c.fillRect(X(x),Y(y),width*s,height*s);c.globalAlpha=1;};
+      const outline=(x,y,width,height)=>{c.strokeStyle=neutral;c.strokeRect(X(x),Y(y),width*s,height*s);};
+      const horizontal=(a,b,y,text)=>{line(a,y,b,y);line(a-3,y+3,a+3,y-3);line(b-3,y+3,b+3,y-3);const tw=c.measureText(text).width+10;c.clearRect((a+b-tw)/2,y-9,tw,18);label(text,(a+b)/2,y);};
+      horizontal(X(-470),X(-15),oy-20,'净宽 455');horizontal(X(15),X(470),oy-20,'净宽 455');
+      if(view==='front'){
+        for(const x of [-500,-15,470])rect(x,storagePlan.height,30,storagePlan.height,neutral,.7);
+        for(const side of [-1,1]){
+          const x=side<0?-470:15,mid=lowerCeiling;
+          rect(x,30,455,30,neutral,.7);rect(x,48,455,18,surface,1);outline(x,48,455,18);
+          rect(x,mid+30,455,30,neutral,.7);rect(x,mid+48,455,18,surface,1);outline(x,mid+48,455,18);
+          rect(x,upperCeiling+30,455,30,neutral,.7);rect(x,storagePlan.height,455,18,surface,1);outline(x,storagePlan.height,455,18);
+          rect(x,56,455,8,neutral,.8);rect(x,upperFloor,455,8,neutral,.8);
+        }
+        for(const item of equipmentItems){
+          if(item.id.startsWith('dumbbell-')&&item.center[2]<0)continue;
+          const x=item.center[0]-item.size[0]/2,y=item.center[1]+item.size[1]/2;
+          rect(x,y,item.size[0],item.size[1],item.center[0]<0?safe:gym,.15);outline(x,y,item.size[0],item.size[1]);
+        }
+        const titles={rope:'缓降绳包',aid:'急救包',kettlebell:'16 kg 壶铃',dumbbells:'10 kg 哑铃 × 2'};
+        for(const bay of storagePlan.bays){
+          const item=equipmentItems.find(i=>i.id===bay.id||(bay.id==='dumbbells'&&i.id.startsWith('dumbbell-'))),itemTop=item.center[1]+item.size[1]/2;
+          const labelHeight=(bay.ceiling-itemTop)*s>=30?(bay.ceiling+itemTop)/2:(bay.floor+bay.ceiling)/2;
+          const x=X(bay.side==='left'?-242.5:242.5),y=Y(labelHeight);label(titles[bay.id],x,y-8);label('净高 '+bay.netHeight,x,y+9);
+        }
+        const dx=ox-24;line(dx,Y(storagePlan.height),dx,Y(0));for(const y of [0,storagePlan.height])line(dx-3,Y(y)+3,dx+3,Y(y)-3);
+        c.save();c.translate(dx,Y(storagePlan.height/2));c.rotate(-Math.PI/2);c.clearRect(-18,-9,36,18);label(String(storagePlan.height),0,0);c.restore();
+      }else{
+        for(const side of [-1,1]){const x=side<0?-470:15;rect(x,-210,455,420,surface,.65);outline(x,-210,455,420);}
+        for(const x of [-485,0,485])for(const z of [-235,235])rect(x-15,z-15,30,30,neutral,.75);
+        const dx=ox-24;line(dx,Y(-210),dx,Y(210));for(const z of [-210,210])line(dx-3,Y(z)+3,dx+3,Y(z)-3);
+        c.save();c.translate(dx,Y(0));c.rotate(-Math.PI/2);c.clearRect(-33,-9,66,18);label('有效深 420',0,0);c.restore();
+        const leftItem=equipmentItems.find(i=>i.id===(view==='lower'?'rope':'aid'));
+        rect(leftItem.center[0]-leftItem.size[0]/2,-leftItem.size[2]/2,leftItem.size[0],leftItem.size[2],safe,.17);
+        outline(leftItem.center[0]-leftItem.size[0]/2,-leftItem.size[2]/2,leftItem.size[0],leftItem.size[2]);
+        label(view==='lower'?'缓降绳包':'急救包',X(-242.5),Y(0)-8);label(view==='lower'?'350 × 350':'400 × 320',X(-242.5),Y(0)+9);
+        if(view==='lower'){
+          c.fillStyle=gym;c.globalAlpha=.18;c.beginPath();c.ellipse(X(242.5),Y(95),111*s,86*s,0,0,Math.PI*2);c.fill();c.globalAlpha=1;c.strokeStyle=neutral;c.stroke();
+          label('16 kg 壶铃',X(242.5),Y(-100)-8);label('222 × 172',X(242.5),Y(-100)+9);
+        }else{
+          for(const z of [-95,105]){rect(82.5,z-68,320,136,gym,.18);outline(82.5,z-68,320,136);label('10 kg',X(242.5),Y(z)-8);label('320 × 136',X(242.5),Y(z)+9);}
+        }
+        label('前方 / 取放侧',X(0),Y(250)+15);
+      }
+      c.fillStyle=neutral;c.textAlign='right';c.fillText('mm',w-3,h-8);
+    });
+  }
+  function layoutDiagram(){
+    const diagram=q('[data-layout]'),w=diagram.getBoundingClientRect().width,h=diagram.getBoundingClientRect().height;if(w<1)return;
+    const dpr=Math.min(window.devicePixelRatio||1,2);diagram.width=Math.round(w*dpr);diagram.height=Math.round(h*dpr);
+    const c=diagram.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,w,h);
+    const fg=color('--foreground'),neutral=color('--muted-foreground'),surface=color('--muted'),safe=color('--viz-series-2'),gym=color('--viz-series-1');
+    c.font='400 12px '+getComputedStyle(root).fontFamily;c.textAlign='center';c.textBaseline='middle';c.lineWidth=1;
+    const left=42,right=40,top=40,bottom=36,s=Math.min((w-left-right)/D.width,(h-top-bottom)/D.height),ox=left+(w-left-right-D.width*s)/2,oy=top+(h-top-bottom-D.height*s)/2;
+    const X=x=>ox+(x+500)*s,Y=y=>oy+(D.height-y)*s;
+    const rect=(x,y,width,height,fill,alpha)=>{c.globalAlpha=alpha===undefined?1:alpha;c.fillStyle=fill;c.fillRect(X(x),Y(y),width*s,height*s);c.globalAlpha=1;};
+    const line=(a,b,d,e)=>{c.strokeStyle=neutral;c.beginPath();c.moveTo(a,b);c.lineTo(d,e);c.stroke();};
+    const label=(t,x,y)=>{c.fillStyle=fg;c.fillText(t,x,y);};
+    const tick=(x,y)=>line(x-3,y+3,x+3,y-3);
+    const horizontal=(a,b,y,text)=>{line(a,y,b,y);tick(a,y);tick(b,y);const n=c.measureText(text).width+10;c.clearRect((a+b-n)/2,y-9,n,18);label(text,(a+b)/2,y);};
+    const vertical=(x,low,high,text)=>{line(x,Y(low),x,Y(high));tick(x,Y(low));tick(x,Y(high));c.save();c.translate(x,Y((low+high)/2));c.rotate(-Math.PI/2);const n=c.measureText(text).width+10;c.clearRect(-n/2,-9,n,18);label(text,0,0);c.restore();};
+    rect(-470,clearTop,940,clearHeight,gym,.06);
+    for(const level of shelfPlan.regular)rect(-470,level.ceiling,455,level.netHeight,surface,.65);
+    for(const level of shelfPlan.right)rect(15,level.ceiling,455,level.netHeight,surface,.25);
+    for(const bay of storagePlan.bays)rect(bay.side==='left'?-470:15,bay.ceiling,455,bay.netHeight,bay.side==='left'?safe:gym,.10);
+    for(const x of [-500,470])rect(x,D.height,30,D.height,neutral,.75);
+    rect(-15,D.bodyHeight,30,D.bodyHeight,neutral,.75);
+    for(const y of [D.section,D.bodyHeight,D.height])rect(-470,y,940,D.section,neutral,.75);
+    rect(-470,floorTop,940,D.shelfThickness,neutral,.5);
+    rect(-470,clearTop+D.acrylic,940,D.acrylic,neutral,.5);
+    for(const x of [-470,15]){
+      for(const boardTop of [48,upperFloor-8,storagePlan.height])rect(x,boardTop,455,18,neutral,.5);
+      for(const beamTop of [lowerCeiling+30,upperCeiling+30])rect(x,beamTop,455,30,neutral,.75);
+      for(const padTop of [56,upperFloor])rect(x,padTop,455,8,neutral,.8);
+      rect(x,drawerPlan.top,455,18,neutral,.5);
+    }
+    for(const level of shelfPlan.regular.slice(0,-1))rect(-470,level.ceiling+18,455,18,neutral,.5);
+    for(const level of shelfPlan.right.slice(0,-1))rect(15,level.ceiling+18,455,18,neutral,.5);
+    for(const drawer of drawers){
+      const cx=drawer.side==='left'?-242.5:242.5;
+      const faceTop=drawer.bottom+drawerPlan.pitch-4;
+      rect(cx-223.5,faceTop,447,drawerPlan.faceHeight,surface,.9);
+      c.strokeStyle=neutral;c.strokeRect(X(cx-223.5),Y(faceTop),447*s,drawerPlan.faceHeight*s);
+      label('抽屉 '+drawerPlan.pitch,X(cx),Y(drawer.bottom+drawerPlan.pitch/2));
+    }
+    rect(-500,topPlan.trackBand.top,1000,D.trackBand,neutral,.45);
+    label('轨道带 '+D.trackBand,X(0),Y(D.bodyHeight+D.trackBand/2));
+    label('展示净高 '+clearHeight,X(0),Y((floorTop+clearTop)/2)-6);
+    label('已扣除顶板、底板',X(0),Y((floorTop+clearTop)/2)+12);
+    for(const level of shelfPlan.regular)label('净高 230',X(-242.5),Y((level.floor+level.ceiling)/2));
+    for(const level of shelfPlan.right)label('净高 '+level.netHeight,X(242.5),Y((level.floor+level.ceiling)/2));
+    const names={rope:'缓降绳包',aid:'急救包',kettlebell:'壶铃',dumbbells:'哑铃 × 2'};
+    for(const bay of storagePlan.bays){const cx=bay.side==='left'?-242.5:242.5,y=Y((bay.floor+bay.ceiling)/2);label(names[bay.id],X(cx),y-8);label('净高 '+bay.netHeight,X(cx),y+9);}
+    horizontal(X(-500),X(500),oy-20,'1000');
+    horizontal(X(-470),X(-15),Y(0)+20,'净宽 455');horizontal(X(15),X(470),Y(0)+20,'净宽 455');
+    vertical(ox-24,0,D.height,String(D.height));vertical(X(500)+22,0,D.bodyHeight,String(D.bodyHeight));vertical(X(500)+22,D.bodyHeight,D.height,String(D.displayHeight));
+  }
+  function refresh(){if(state.mode==='dimensions')dimensions();else if(state.mode==='bottom-plan')bottomDiagrams();else if(state.mode==='layout')layoutDiagram();else redraw();}
+  function save(){
+    if(!window.openai||!window.openai.setWidgetState)return;
+    try{const result=window.openai.setWidgetState({modelContent:{model:'方案二：展示净高400毫米',revision:12,option:2,dimensionsMm:{width:D.width,depth:D.depth,height:D.height},assemblyDimensionsMm:{closedWidth:1000,openWidth:2000,depth:660,height:2300},displayDimensionsMm:{width:D.width,depth:D.displayDepth,height:D.displayHeight,netHeight:clearHeight},topSupport:topPlan,middleConnection:{...midPlan,enabled:state.midSupport,positionMm:Math.round(state.slide)},bodyHeightMm:D.bodyHeight,displayHeightMm:D.displayHeight,sectionMm:D.section,bottomZone:storagePlan,drawerZone:drawerPlan,upperZone:shelfPlan,slidingLayers:{mirror:{...slidePlan,positionMm:Math.round(state.slide),connection:slideState()},pegboard:{...pegPlan,positionMm:Math.round(state.pegSlide),connection:slideState(undefined,'peg')},linked:state.linked},drawersOpen:state.drawers,coverVisible:state.cover,headerVisible:state.header,figuresVisible:state.figures,equipmentVisible:state.equipment,mode:state.mode,view:state.view},
+      privateContent:{modelId:identity,mode:state.mode,view:state.view,focus:state.focus,slide:state.slide,pegSlide:state.pegSlide,linked:state.linked,activeLayer:state.activeLayer,drawers:state.drawers,cover:state.cover,header:state.header,midSupport:state.midSupport,figures:state.figures,equipment:state.equipment,yaw:state.yaw,pitch:state.pitch,zoom:state.zoom}});if(result&&result.catch)result.catch(function(){});}catch(e){}
+  }
+  function syncSlide(){
+    qa('[data-preset]').forEach(b=>{const match=b.dataset.preset==='open'?state.slide>999.9&&state.pegSlide>999.9:b.dataset.preset==='closed'?state.slide<.1&&state.pegSlide<.1:state.slide<.1&&state.pegSlide>999.9;b.setAttribute('aria-pressed',String(state.focus==='whole'&&match));});
+    q('[data-slide]').value=String(state.slide);q('[data-slide-output]').value=String(Math.round(state.slide));
+    q('[data-peg]').value=String(state.pegSlide);q('[data-peg-output]').value=String(Math.round(state.pegSlide));
+    q('[data-slide]').setAttribute('aria-valuetext',Math.round(state.slide)+'毫米');q('[data-peg]').setAttribute('aria-valuetext',Math.round(state.pegSlide)+'毫米');
+    q('[data-slide-toggle]').textContent=state.linked?(state.slide>.1?'一起收回':'一起右移'):(state.slide>.1?'收回镜子':'右移镜子');
+    q('[data-peg-toggle]').textContent=state.pegSlide>.1?'收回洞洞板':'右移洞洞板';q('[data-peg-toggle]').hidden=state.linked||linking;
+    q('[data-linked]').checked=state.linked||linking;q('[data-link-label]').textContent=linking?'正在对齐洞洞板…':state.linked?'一起移动（联动件已插入）':'一起移动（插销联动）';
+    const blocked=state.slide<999.9||state.pegSlide<999.9;if(blocked)state.drawers=false;
+    q('[data-drawers]').disabled=blocked;q('[data-drawers]').checked=state.drawers;
+    q('[data-drawer-label]').textContent=blocked?'抽屉（两层全开后可拉出）':'拉开抽屉';
+  }
+  function sync(){
+    qa('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===state.mode)));
+    qa('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===state.view)));
+    q('[data-cover]').checked=state.cover;q('[data-header]').checked=state.header;q('[data-mid-support]').checked=state.midSupport;q('[data-figures]').checked=state.figures;q('[data-equipment]').checked=state.equipment;q('[data-drawers]').checked=state.drawers;
+    syncSlide();
+    q('[data-view-label]').textContent=state.focus==='display'?'展示区深 660 · 净高 '+clearHeight+' mm（已扣除顶板、底板）':state.focus==='connection'?'后侧固定轨 → 顶部连接板 → 横梁 → 主体立柱':state.focus==='mid-connection'?'横梁 → 辅助伸缩轨 → 浮动连接 → 镜框背横板；门面及外层已隐去':'上下轨主承重 · 中部防摆连接 · 全开仍为悬臂';
+    q('[data-model-panel]').hidden=state.mode!=='model';q('[data-dimensions-panel]').hidden=state.mode!=='dimensions';q('[data-bottom-plan-panel]').hidden=state.mode!=='bottom-plan';q('[data-layout-panel]').hidden=state.mode!=='layout';
+    refresh();
+  }
+  qa('[data-mode]').forEach(b=>b.addEventListener('click',()=>{state.mode=b.dataset.mode;sync();save();}));
+  const views={bottom:[.42,.20,'bottom'],perspective:[.42,.15,'whole'],connection:[.70,.35,'connection'],'mid-connection':[.65,.35,'mid-connection'],display:[.58,.12,'display'],front:[0,0,'whole'],side:[Math.PI/2,.12,'whole'],back:[Math.PI,.12,'whole']};
+  qa('[data-view]').forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;state.yaw=views[state.view][0];state.pitch=views[state.view][1];state.focus=views[state.view][2];state.zoom=1;if(state.focus==='connection')state.header=false;if(state.focus==='mid-connection')state.midSupport=true;sync();save();}));
+  q('[data-cover]').addEventListener('change',e=>{state.cover=e.target.checked;sync();save();});
+  q('[data-header]').addEventListener('change',e=>{state.header=e.target.checked;sync();save();});
+  q('[data-mid-support]').addEventListener('change',e=>{state.midSupport=e.target.checked;sync();save();});
+  q('[data-figures]').addEventListener('change',e=>{state.figures=e.target.checked;sync();save();});
+  q('[data-equipment]').addEventListener('change',e=>{state.equipment=e.target.checked;sync();save();});
+  q('[data-drawers]').addEventListener('change',e=>{state.drawers=e.target.checked;sync();save();});
+  let slideAnimation=0,linking=false;
+  function stopMovement(){cancelAnimationFrame(slideAnimation);slideAnimation=0;linking=false;}
+  function animateMovement(target,onDone){
+    cancelAnimationFrame(slideAnimation);const fromM=state.slide,fromP=state.pegSlide,toM=target.slide===undefined?fromM:target.slide,toP=target.pegSlide===undefined?fromP:target.pegSlide,start=performance.now(),duration=window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:700;
+    function step(now){const t=duration?Math.min(1,(now-start)/duration):1,eased=t*t*(3-2*t);state.slide=fromM+(toM-fromM)*eased;state.pegSlide=fromP+(toP-fromP)*eased;syncSlide();refresh();if(t<1)slideAnimation=requestAnimationFrame(step);else{slideAnimation=0;if(onDone)onDone();syncSlide();refresh();save();}}
+    slideAnimation=requestAnimationFrame(step);
+  }
+  function manualMove(layer,value){
+    stopMovement();state.activeLayer=layer;const x=Math.max(0,Math.min(1000,Number(value)));
+    if(layer==='mirror')state.slide=x;else state.pegSlide=x;if(state.linked){state.slide=x;state.pegSlide=x;}syncSlide();refresh();
+  }
+  q('[data-slide]').addEventListener('input',e=>manualMove('mirror',e.target.value));q('[data-peg]').addEventListener('input',e=>manualMove('peg',e.target.value));
+  q('[data-slide]').addEventListener('change',save);q('[data-peg]').addEventListener('change',save);
+  function toggleLayer(layer){stopMovement();state.activeLayer=layer;const x=layer==='mirror'?state.slide:state.pegSlide,to=x>.1?0:1000;animateMovement(state.linked?{slide:to,pegSlide:to}:layer==='mirror'?{slide:to}:{pegSlide:to});}
+  q('[data-slide-toggle]').addEventListener('click',()=>toggleLayer('mirror'));q('[data-peg-toggle]').addEventListener('click',()=>toggleLayer('peg'));
+  qa('[data-preset]').forEach(b=>b.addEventListener('click',()=>{
+    stopMovement();const preset=b.dataset.preset;
+    state.mode='model';state.view='perspective';state.focus='whole';state.yaw=.42;state.pitch=.15;state.zoom=1;state.drawers=false;
+    state.cover=true;state.figures=true;state.equipment=true;state.header=true;state.midSupport=true;if(preset==='mirror')state.linked=false;
+    sync();animateMovement(preset==='open'?{slide:1000,pegSlide:1000}:preset==='closed'?{slide:0,pegSlide:0}:{slide:0,pegSlide:1000});
+  }));
+  q('[data-linked]').addEventListener('change',e=>{
+    const desired=e.target.checked;stopMovement();state.linked=false;
+    if(!desired){syncSlide();refresh();save();return;}
+    if(Math.abs(state.slide-state.pegSlide)<.1){state.pegSlide=state.slide;state.linked=true;syncSlide();refresh();save();return;}
+    linking=true;state.activeLayer='peg';syncSlide();animateMovement({pegSlide:state.slide},()=>{linking=false;state.linked=true;});
+  });
+  const pointers=new Map();let gesture=null;
+  function begin(){const a=Array.from(pointers.values());gesture=a.length>1?{pinch:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),zoom:state.zoom}:a.length?{x:a[0].x,y:a[0].y,yaw:state.yaw,pitch:state.pitch}:null;}
+  canvas.addEventListener('pointerdown',e=>{pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});canvas.setPointerCapture(e.pointerId);begin();});
+  canvas.addEventListener('pointermove',e=>{
+    if(!pointers.has(e.pointerId)||!gesture)return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});const a=Array.from(pointers.values());
+    if(a.length>1&&gesture.pinch)state.zoom=Math.max(.6,Math.min(2.5,gesture.zoom*gesture.pinch/Math.max(1,Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y))));
+    else if(a.length===1&&!gesture.pinch){state.yaw=gesture.yaw-(e.clientX-gesture.x)*.009;state.pitch=Math.max(-.45,Math.min(1.3,gesture.pitch+(e.clientY-gesture.y)*.007));state.view='custom';}
+    qa('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===state.view)));redraw();
+  });
+  function end(e){if(pointers.delete(e.pointerId)){begin();save();}}
+  canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);
+  let wheelSave=0;canvas.addEventListener('wheel',e=>{e.preventDefault();state.zoom=Math.max(.6,Math.min(2.5,state.zoom*Math.exp(e.deltaY*.001)));redraw();clearTimeout(wheelSave);wheelSave=setTimeout(save,180);},{passive:false});
+  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();lost=true;q('[data-error]').hidden=false;});
+  canvas.addEventListener('webglcontextrestored',()=>{lost=false;start();sync();});
+  function theme(){const rgb=color('--foreground').match(/[\d.]+/g);dark=!!(rgb&&Number(rgb[0])>140);refresh();}
+  new ResizeObserver(refresh).observe(root);
+  new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+  window.addEventListener('openai:set_globals',event=>{
+    const s=event.detail&&event.detail.globals&&event.detail.globals.widgetState,privateState=s&&s.privateContent;
+    if(!privateState||privateState.modelId!==identity)return;
+    stopMovement();
+    state.mode=['dimensions','bottom-plan','layout'].includes(privateState.mode)?privateState.mode:'model';state.view=privateState.view||'custom';state.focus=['bottom','display','connection','mid-connection'].includes(privateState.focus)?privateState.focus:'whole';
+    state.slide=Math.max(0,Math.min(slidePlan.travel,finite(privateState.slide,300)));state.pegSlide=Math.max(0,Math.min(1000,finite(privateState.pegSlide,800)));state.linked=privateState.linked===true;state.activeLayer=privateState.activeLayer==='peg'?'peg':'mirror';if(state.linked)state.pegSlide=state.slide;
+    state.cover=privateState.cover!==false;state.figures=privateState.figures!==false;state.equipment=privateState.equipment!==false;state.drawers=privateState.drawers===true;
+    state.header=privateState.header!==false;
+    state.midSupport=privateState.midSupport!==false;
+    state.yaw=finite(privateState.yaw,.58);state.pitch=Math.max(-.45,Math.min(1.3,finite(privateState.pitch,.12)));state.zoom=Math.max(.6,Math.min(2.5,finite(privateState.zoom,1)));sync();
+  });
+  root._frame={dimensions:D,parts,triangles,glassTriangles,figures,state,storagePlan,drawerPlan,drawers,shelfPlan,slidePlan,pegPlan,topPlan,midPlan,slideState,equipmentItems,equipmentTriangles,render,drawDimensions:dimensions,drawBottomDiagrams:bottomDiagrams,drawLayout:layoutDiagram,getGL:()=>gl};
+  start();theme();sync();
+})();
+</script>
+</body>
+</html>

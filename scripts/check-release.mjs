@@ -45,4 +45,5 @@ for(const name of ['index.html','dimensions.html','materials.html']){
 for(const name of ['model.js','site.js','zhuji-embed.js'])new vm.Script(await fs.readFile(path.join(tvDirectory,'assets',name),'utf8'));
 assert(manifest.projects.some(p=>p.id==='elevator-shoe-cabinet'));
 const shoeFrame=await validateShoeFrame(dir);
+assert.equal(manifest.projects.find(p=>p.id==='elevator-shoe-cabinet').revision,shoeFrame.layoutRevision??1,'Published catalog matches shoe model');
 console.log(JSON.stringify({version:index.latest,verifiedFiles:lines.length,publicFiles:publicFiles.length,defaultEdition:'admin',privateData:'encrypted',shoeFrame,checks:'passed'}));
