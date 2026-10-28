@@ -45,10 +45,23 @@ export async function buildPrivateResources(source,write,encrypt){
   return resources;
 }
 
-export async function preparePublicDesigns(source,stage,previewFile){
+export async function preparePublicDesigns(source,stage,previewFile,version='当前版'){
   const original='shoe-cabinet-reference.png';
   await fs.cp(path.join(source,'designs/aluminum'),path.join(stage,'aluminum/designs/aluminum'),{recursive:true,filter:file=>path.basename(file)!==original&&!path.basename(file).startsWith('.')});
   const shoe=path.join(stage,'aluminum/designs/aluminum/elevator-shoe-cabinet');
+  for(const name of ['index.html','dimensions.html','storage-report.js','README.md']){
+    const file=path.join(shoe,name);if(!await fs.access(file).then(()=>true).catch(()=>false))continue;
+    let text=await fs.readFile(file,'utf8');
+    text=text.replaceAll('本地候选 · 灯箱改侧挂','发布版 '+version+' · 灯箱侧挂')
+      .replaceAll('本地调整 · 上部有门，下部开放','发布版 '+version+' · 上部有门，下部开放')
+      .replaceAll('仅更新本地住记，未发布。','住记 '+version+'。')
+      .replaceAll('当前仅本地方案；','当前发布方案；').replaceAll('当前仅本地修改。','当前为 '+version+' 发布版。')
+      .replaceAll('横向灯箱为本地暂定尺寸；','侧挂灯箱按当前方案示意；')
+      .replaceAll('先按图片中左侧外角位置制作，尺寸与占地均为本地待确认候选：','当前发布方案采用左侧外角侧挂：')
+      .replace(/^[^\n]*(?:设计归档\/|不作为发布授权)[^\n]*\n?/gm,'')
+      .replaceAll('http://127.0.0.1:4173/','https://misslamajay.github.io/home-renovation/aluminum/');
+    await fs.writeFile(file,text);
+  }
   const rendering=path.join(shoe,'rendering.html');
   if(await fs.access(rendering).then(()=>true).catch(()=>false)){
     if(!previewFile)throw Error('鞋柜参考图需要不含截图界面的公开预览照片。');

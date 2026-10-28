@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
+import {validateShoeStorage} from './check-shoe-storage.mjs';
 export async function validateShoeFrame(versionDirectory) {
   const file=path.join(versionDirectory,'aluminum/designs/aluminum/elevator-shoe-cabinet/geometry.js');
   const {model,dimensions:d,members,footprint,posts,edges}=await import(pathToFileURL(file).href);
@@ -60,6 +61,9 @@ export async function validateShoeFrame(versionDirectory) {
     assert.equal(layout.lightbox.text,'怪兽小屋');assert.equal(layout.lightbox.width,920);assert.equal(layout.lightbox.height,180);assert.equal(layout.lightbox.depth,80);
     assert.equal(layout.lightbox.top,2320);assert.equal(layout.lightbox.bottom,2140);
     Object.assign(result,{layoutRevision:layout.revision,assemblyMembers:layout.members.length,shelfHeights:expected,topReserve:300,drawerNetHeights:[168,160],lightbox:layout.lightbox.text});
+  }
+  if(await fs.access(path.join(path.dirname(file),'storage-geometry.js')).then(()=>true).catch(()=>false)){
+    const baseline=result.layoutRevision;Object.assign(result,await validateShoeStorage(versionDirectory),{baselineLayoutRevision:baseline});
   }
   return result;
 }

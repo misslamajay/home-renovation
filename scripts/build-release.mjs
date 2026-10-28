@@ -14,6 +14,13 @@ const credentialsPath = path.resolve(option('--credentials', path.join(root, '..
 if (credentialsPath.startsWith(root + path.sep)) throw Error('管理员口令必须保存在仓库外。');
 const target = path.join(root, 'versions', tag), stage = path.join(root, '.release-build', tag);
 const exists = async file => fs.access(file).then(() => true).catch(() => false);
+if(!await exists(target)&&await exists(path.join(root,'releases.json'))){
+  const latest=JSON.parse(await fs.readFile(path.join(root,'releases.json'),'utf8')).latest;
+  if(/^v\d+\.\d+\.\d+$/.test(latest||'')){
+    const previous=latest.slice(1).split('.').map(Number),next=version.split('.').map(Number);
+    if((next.map((n,i)=>n-previous[i]).find(n=>n!==0)||0)<=0)throw Error('新版本必须高于当前发布版本 '+latest+'。');
+  }
+}
 if (await exists(target)) {
   if (!args.includes('--rebuild')) throw Error('版本目录已存在，请递增版本；未发布的构建才可使用 --rebuild。');
   const tags = execFileSync('git', ['tag', '-l', tag], { cwd: root, encoding: 'utf8' }).trim();
@@ -82,7 +89,7 @@ adminHTML = adminHTML.replaceAll('href="/', 'href="./').replaceAll('src="/', 'sr
 if(resources['lighting-workspace'])adminHTML=replaceOnce(adminHTML,'<link rel="stylesheet" href="./designs/switch-panels/workspace.css">','<style>'+await fs.readFile(path.join(source,'designs/switch-panels/workspace.css'),'utf8')+'</style>','管理员灯光样式');
 adminHTML = replaceOnce(adminHTML, '<script type="module" src="./app.js"></script>', '<script src="./bridge.js"></script><script type="module" src="./app.js"></script>', '管理员启动');
 await write('admin/app.html', adminHTML);
-const aluminumSource = await fs.readFile(path.join(source, 'aluminum.js'), 'utf8');
+const aluminumSource = (await fs.readFile(path.join(source, 'aluminum.js'), 'utf8')).replaceAll('此版本先本地确认尺寸及占地。','当前为已发布方案；安装尺寸及五金按实物复核。');
 const projectCatalog = (await import(pathToFileURL(path.join(source, 'aluminum.js')).href)).aluminumProjects;
 if (!Array.isArray(projectCatalog) || projectCatalog.some(p => !p.id || !p.name)) throw Error('设计项目目录无效。');
 for (const [edition, directory] of [['admin', '../aluminum/designs/aluminum'], ['aluminum', './designs/aluminum']]) {
@@ -92,7 +99,7 @@ for (const [edition, directory] of [['admin', '../aluminum/designs/aluminum'], [
 }
 await write('aluminum/index.html', (await template('public.html')).replaceAll('{{VERSION}}', tag));
 await write('aluminum/public-app.js', await template('public-app.js'));
-await preparePublicDesigns(source,stage,option('--shoe-preview',path.join(root,'.qa/release-shoe-reference-preview.png')));
+await preparePublicDesigns(source,stage,option('--shoe-preview',path.join(root,'.qa/release-shoe-reference-preview.png')),tag);
 await fs.appendFile(path.join(stage, 'aluminum/aluminum.css'), '\n.public-version{font-size:11px;color:#85858d;white-space:nowrap}.window-actions [hidden]{display:none!important}@media(max-width:480px){.public-version{font-size:10px}}\n');
 const release = { version:tag, createdAt:new Date().toISOString(), defaultEdition:'admin', modelRevision:projectCatalog.find(p=>p.id==='living-mirror-cabinet')?.revision, projects:projectCatalog.map(({id,name,revision})=>({id,name,revision})), editions:{ admin:{path:'./',access:'passphrase'}, aluminum:{path:'./aluminum/',access:'public'} }, legacy:{version:'v9.0.0',path:'../../tv-stand.html'} };
 await write('release.json', JSON.stringify(release, null, 2) + '\n');
