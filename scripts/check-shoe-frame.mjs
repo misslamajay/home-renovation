@@ -28,12 +28,12 @@ export async function validateShoeFrame(versionDirectory) {
   const layoutFile=path.join(path.dirname(file),'bench-geometry.js');
   if(await fs.access(layoutFile).then(()=>true).catch(()=>false)){
     const {model:layout,benchParts}=await import(pathToFileURL(layoutFile).href);
-    assert.equal(layout.revision,8);assert.equal(posts.length,7);
+    assert.equal(layout.revision,16);assert.equal(posts.length,7);
     assert.deepEqual(layout.footprint,footprint);assert.deepEqual(layout.posts,posts);
     const fixed=[...layout.members,...layout.fixtures],box=m=>m.center.map((v,k)=>[v-m.size[k]/2,v+m.size[k]/2]);
     const intersects=(a,b)=>a.every((v,k)=>Math.min(v[1],b[k][1])-Math.max(v[0],b[k][0])>.001);
     for(let i=0;i<fixed.length;i++)for(let j=i+1;j<fixed.length;j++)assert(!intersects(box(fixed[i]),box(fixed[j])),fixed[i].id+' overlaps '+fixed[j].id);
-    const expected=[120,130,170,170,170,260,160,160,160];
+    const expected=[160,160,170,170,170,130,260,160,160];
     assert.deepEqual(layout.leftStorage.layers.map(l=>l.netHeight),expected);
     layout.leftStorage.layers.forEach((layer,i)=>{
       const floor=box(layout.fixtures.find(m=>m.id===`left-board-${i}-0`))[1][1];
@@ -42,10 +42,12 @@ export async function validateShoeFrame(versionDirectory) {
       assert.equal(Math.min(...supports.map(m=>box(m)[1][0]))-floor,expected[i],'Actual shelf net height');
     });
     const lastTop=box(layout.fixtures.find(m=>m.id==='left-board-9-0'))[1][1];
-    assert.equal(d.height-d.section-lastTop,340);
+    assert.equal(d.height-d.section-lastTop,300);
+    assert.deepEqual(layout.alignment,{dividerTop:256,leftShelfTop:464,seatTop:484,heightDifference:20});
+    assert.deepEqual([layout.pegboard.width,layout.pegboard.height,layout.pegboard.front],[920,1650,22]);
     const closed=benchParts([0,0]).boxes;
     assert.equal(closed.filter(m=>m.material==='acrylic').length,12);
-    for(const [i,net]of [182,150].entries()){
+    for(const [i,net]of [168,160].entries()){
       const floor=box(closed.find(m=>m.id===`drawer-${i}-bottom`))[1][1]+(i?0:2);
       const ceiling=i?Math.min(...layout.members.filter(m=>m.id.startsWith('seat-long-')).map(m=>box(m)[1][0])):box(layout.fixtures.find(m=>m.id==='drawer-divider'))[1][0];
       assert.equal(ceiling-floor,net,'Actual drawer net height');
@@ -57,7 +59,7 @@ export async function validateShoeFrame(versionDirectory) {
     }
     assert.equal(layout.lightbox.text,'怪兽小屋');assert.equal(layout.lightbox.width,920);assert.equal(layout.lightbox.height,180);assert.equal(layout.lightbox.depth,80);
     assert.equal(layout.lightbox.top,2320);assert.equal(layout.lightbox.bottom,2140);
-    Object.assign(result,{layoutRevision:layout.revision,assemblyMembers:layout.members.length,shelfHeights:expected,topReserve:340,drawerNetHeights:[182,150],lightbox:layout.lightbox.text});
+    Object.assign(result,{layoutRevision:layout.revision,assemblyMembers:layout.members.length,shelfHeights:expected,topReserve:300,drawerNetHeights:[168,160],lightbox:layout.lightbox.text});
   }
   return result;
 }

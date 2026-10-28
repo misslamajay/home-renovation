@@ -13,6 +13,7 @@ async function loadConfig() {
 let sessionKey, manifest, storageValues = {}, draftQueue = Promise.resolve(), blockedDrafts = false;
 let generation = 0;
 const imageURLs = new Map(), pendingImages = new Map();
+const resourceURLs = new Map(), pendingResources = new Map();
 const bytesFrom64 = text => Uint8Array.from(atob(text), c => c.charCodeAt(0));
 function to64(bytes) {
   let value = '';
@@ -54,6 +55,20 @@ async function prepareEvidence(evidence) {
   })();
   pendingImages.set(name, pending);
   try { await pending; } finally { pendingImages.delete(name); }
+}
+async function privateResourceURL(name) {
+  if(!sessionKey)throw Error('住记已锁定。');
+  if(resourceURLs.has(name))return resourceURLs.get(name);
+  if(pendingResources.has(name))return pendingResources.get(name);
+  const asset=manifest?.resources?.[name],key=sessionKey,stamp=generation;
+  if(!asset)throw Error('本版本未收录此资料。');
+  const pending=(async()=>{
+    const bytes=await readEncrypted(new URL(asset.path,location.href),config.version+'/'+asset.path,key);
+    if(stamp!==generation||!sessionKey)throw Error('住记已锁定。');
+    const url=URL.createObjectURL(new Blob([bytes],{type:asset.mime}));resourceURLs.set(name,url);return url;
+  })();
+  pendingResources.set(name,pending);
+  try{return await pending;}finally{pendingResources.delete(name);}
 }
 $('#show-password').addEventListener('click', () => {
   const show = $('#passphrase').type === 'password';
@@ -100,6 +115,7 @@ $('#unlock-form').addEventListener('submit', async event => {
         prepare: prepareEvidence,
         url: evidence => imageURLs.get((evidence.imported ? 'imported/' : '') + evidence.filename) || '',
       }),
+      resources: Object.freeze({url:privateResourceURL}),
     });
     window.ZhujiSession = api;
     $('#gate').hidden = true; $('#session').hidden = false;
@@ -115,6 +131,7 @@ $('#lock').addEventListener('click', async () => {
   generation++; $('#admin-app').removeAttribute('src'); $('#admin-app').hidden = true;
   window.ZhujiSession = undefined; sessionKey = null; manifest = null; storageValues = {};
   imageURLs.forEach(url => URL.revokeObjectURL(url)); imageURLs.clear(); pendingImages.clear();
+  resourceURLs.forEach(url=>URL.revokeObjectURL(url));resourceURLs.clear();pendingResources.clear();
   $('#session').hidden = true; $('#gate').hidden = false; $('#save-state').textContent = ''; $('#lock').disabled = false;
   $('#passphrase').focus();
 });

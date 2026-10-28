@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import {buildPrivateResources,preparePublicDesigns} from './private-resources.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const option = (name, fallback) => { const index = args.indexOf(name); return index < 0 ? fallback : args[index + 1]; };
@@ -54,7 +55,8 @@ for (const item of sourceData.items) for (const entry of item.evidence || []) {
   evidence[name] = { path:resource, mime, sha256:crypto.createHash('sha256').update(bytes).digest('hex') };
   await write(resource, encrypt(bytes, tag + '/' + resource));
 }
-await write('vault/manifest.bin', encrypt(Buffer.from(JSON.stringify({ version:tag, source:sourceData, evidence, draftMigrationKeys:credentials.draftMigrationKeys||[] })), tag + '/manifest'));
+const resources=await buildPrivateResources(source,write,(bytes,resource)=>encrypt(bytes,tag+'/'+resource));
+await write('vault/manifest.bin', encrypt(Buffer.from(JSON.stringify({ version:tag, source:sourceData, evidence, resources, draftMigrationKeys:credentials.draftMigrationKeys||[] })), tag + '/manifest'));
 await write('vault/meta.json', JSON.stringify({ version:tag, algorithm:'AES-256-GCM', derivation:'PBKDF2-SHA-256', iterations:credentials.iterations, salt:credentials.salt }, null, 2) + '\n');
 key.fill(0);
 for (const name of ['access.js', 'access.css']) await write(name, await template(name));
@@ -62,6 +64,7 @@ await write('index.html', (await template('unlock.html')).replaceAll('{{VERSION}
 await write('admin/bridge.js', await template('admin-bridge.js'));
 
 let app = await fs.readFile(path.join(source, 'app.js'), 'utf8');
+if(resources['lighting-workspace'])app=replaceOnce(app,"import { createLightingWorkspace } from './designs/switch-panels/workspace.js';","const { createLightingWorkspace } = await import(await window.ZhujiPrivate.url('lighting-workspace'));",'私密灯光模块');
 app = app.replaceAll('localStorage', 'appStorage');
 app = 'const appStorage=window.ZhujiStorage;\n' + app;
 app = replaceOnce(app, /^const evidenceURL=.*$/m, 'const evidenceURL=e=>window.ZhujiEvidence.url(e);', '原图地址');
@@ -76,6 +79,7 @@ app = replaceOnce(app, /function renderViewer\(\)\{/, `async function renderView
 await write('admin/app.js', app);
 let adminHTML = await fs.readFile(path.join(source, 'index.html'), 'utf8');
 adminHTML = adminHTML.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
+if(resources['lighting-workspace'])adminHTML=replaceOnce(adminHTML,'<link rel="stylesheet" href="./designs/switch-panels/workspace.css">','<style>'+await fs.readFile(path.join(source,'designs/switch-panels/workspace.css'),'utf8')+'</style>','管理员灯光样式');
 adminHTML = replaceOnce(adminHTML, '<script type="module" src="./app.js"></script>', '<script src="./bridge.js"></script><script type="module" src="./app.js"></script>', '管理员启动');
 await write('admin/app.html', adminHTML);
 const aluminumSource = await fs.readFile(path.join(source, 'aluminum.js'), 'utf8');
@@ -88,7 +92,7 @@ for (const [edition, directory] of [['admin', '../aluminum/designs/aluminum'], [
 }
 await write('aluminum/index.html', (await template('public.html')).replaceAll('{{VERSION}}', tag));
 await write('aluminum/public-app.js', await template('public-app.js'));
-await fs.cp(path.join(source, 'designs'), path.join(stage, 'aluminum/designs'), { recursive:true });
+await preparePublicDesigns(source,stage,option('--shoe-preview',path.join(root,'.qa/release-shoe-reference-preview.png')));
 await fs.appendFile(path.join(stage, 'aluminum/aluminum.css'), '\n.public-version{font-size:11px;color:#85858d;white-space:nowrap}.window-actions [hidden]{display:none!important}@media(max-width:480px){.public-version{font-size:10px}}\n');
 const release = { version:tag, createdAt:new Date().toISOString(), defaultEdition:'admin', modelRevision:projectCatalog.find(p=>p.id==='living-mirror-cabinet')?.revision, projects:projectCatalog.map(({id,name,revision})=>({id,name,revision})), editions:{ admin:{path:'./',access:'passphrase'}, aluminum:{path:'./aluminum/',access:'public'} }, legacy:{version:'v9.0.0',path:'../../tv-stand.html'} };
 await write('release.json', JSON.stringify(release, null, 2) + '\n');
@@ -115,4 +119,7 @@ for(const [name, cwd, entries] of [['zhuji-'+tag+'-admin.zip',target,['.']],['zh
   const zip=path.join(artifacts,name); await fs.rm(zip,{force:true});
   execFileSync('zip',['-q','-r',zip,...entries],{cwd,stdio:['ignore','pipe','pipe']});
 }
+const packageChecksums=[];
+for(const name of (await fs.readdir(artifacts)).filter(n=>n.endsWith('.zip')).sort())packageChecksums.push(crypto.createHash('sha256').update(await fs.readFile(path.join(artifacts,name))).digest('hex')+'  '+name);
+await fs.writeFile(path.join(artifacts,'SHA256SUMS-packages.txt'),packageChecksums.join('\n')+'\n');
 console.log(JSON.stringify({ version:tag, defaultEdition:'admin', directory:target, credentialsFile:credentialsPath, encryptedEvidence:Object.keys(evidence).length, artifacts, sourceRecords:sourceData.items.length }));

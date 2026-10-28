@@ -20,11 +20,13 @@ assert(!files.some(f=>/\.xlsx$/.test(f)&&path.relative(dir,f).split(path.sep).jo
 assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(dir,publicWorkbook))).digest('hex'),crypto.createHash('sha256').update(await fs.readFile(path.join(root,'versions/v9.0.0/downloads/tv-stand-v9-materials-audit.xlsx'))).digest('hex'),'Only the previously public TV materials workbook may ship');
 const publicFiles=await walk(path.join(dir,'aluminum'));
 assert(!publicFiles.some(f=>/\/vault\/|\/evidence\/|\/data\//.test(f)));
+assert(!publicFiles.some(f=>/switch-panels|shoe-cabinet-reference\.png|admin-access/.test(f)),'No private lighting files or complete reference originals in public design package');
 const publicHTML=await fs.readFile(path.join(dir,'aluminum/index.html'),'utf8');
 assert(!/全部设备|待办事项|导出备份|管理员/.test(publicHTML));
 const publicApp=await fs.readFile(path.join(dir,'aluminum/public-app.js'),'utf8');
 assert(!/api\/data|paidCents|orderNumber|ZhujiSession/.test(publicApp));
 const adminApp=await fs.readFile(path.join(dir,'admin/app.js'),'utf8');
+assert(adminApp.includes("window.ZhujiPrivate.url('lighting-workspace')"),'Lighting is decrypted after administrator unlock');
 assert(!/localStorage\.(getItem|setItem)/.test(adminApp));
 assert(adminApp.includes('window.ZhujiSource()'));assert(adminApp.includes('await window.ZhujiEvidence.prepare'));
 const model=await fs.readFile(path.join(dir,'aluminum/designs/aluminum/living-mirror-cabinet/option-two.html'),'utf8');
@@ -43,6 +45,14 @@ for(const name of ['index.html','dimensions.html','materials.html']){
   }
 }
 for(const name of ['model.js','site.js','zhuji-embed.js'])new vm.Script(await fs.readFile(path.join(tvDirectory,'assets',name),'utf8'));
+const {createFoundation,stability}=await import(new URL('file://'+path.join(tvDirectory,'assets/foundation-geometry.js')).href);
+for(const depth of [800,1000]){
+  const frame=createFoundation(depth);assert.equal(frame.profiles.length,20);assert.equal(new Set(frame.profiles.map(p=>p.id)).size,20);
+  assert.deepEqual(frame.clear.openings.map(p=>p.height),[269,520,320,255]);
+  for(const profile of frame.profiles)assert(Math.abs(profile.length-Math.hypot(...profile.end.map((v,i)=>v-profile.start[i])))<1e-6);
+  assert.equal(frame.wheels.length,4);assert.equal(frame.bounds.supportDepth,depth-240);
+  const s=stability(frame);assert.equal(s.factor>1.5,depth===1000);
+}
 assert(manifest.projects.some(p=>p.id==='elevator-shoe-cabinet'));
 const shoeFrame=await validateShoeFrame(dir);
 assert.equal(manifest.projects.find(p=>p.id==='elevator-shoe-cabinet').revision,shoeFrame.layoutRevision??1,'Published catalog matches shoe model');

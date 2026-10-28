@@ -5,4 +5,5 @@ if (!owner) {
   window.ZhujiSource = owner.source;
   window.ZhujiStorage = owner.storage;
   window.ZhujiEvidence = owner.evidence;
+  window.ZhujiPrivate = owner.resources;
 }
