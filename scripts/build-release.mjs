@@ -89,7 +89,7 @@ adminHTML = adminHTML.replaceAll('href="/', 'href="./').replaceAll('src="/', 'sr
 if(resources['lighting-workspace'])adminHTML=replaceOnce(adminHTML,'<link rel="stylesheet" href="./designs/switch-panels/workspace.css">','<style>'+await fs.readFile(path.join(source,'designs/switch-panels/workspace.css'),'utf8')+'</style>','管理员灯光样式');
 adminHTML = replaceOnce(adminHTML, '<script type="module" src="./app.js"></script>', '<script src="./bridge.js"></script><script type="module" src="./app.js"></script>', '管理员启动');
 await write('admin/app.html', adminHTML);
-const aluminumSource = (await fs.readFile(path.join(source, 'aluminum.js'), 'utf8')).replaceAll('此版本先本地确认尺寸及占地。','当前为已发布方案；安装尺寸及五金按实物复核。');
+const aluminumSource = (await fs.readFile(path.join(source, 'aluminum.js'), 'utf8')).replaceAll('此版本先本地确认尺寸及占地。','当前为已发布方案；安装尺寸及五金按实物复核。').replaceAll('此为当前本地方案。','此为 '+tag+' 发布方案。');
 const projectCatalog = (await import(pathToFileURL(path.join(source, 'aluminum.js')).href)).aluminumProjects;
 if (!Array.isArray(projectCatalog) || projectCatalog.some(p => !p.id || !p.name)) throw Error('设计项目目录无效。');
 for (const [edition, directory] of [['admin', '../aluminum/designs/aluminum'], ['aluminum', './designs/aluminum']]) {
@@ -114,6 +114,8 @@ const redirect = (to, title) => '<!doctype html><html lang="zh-CN"><head><meta c
 await fs.writeFile(path.join(root,'index.html'), redirect('versions/'+tag+'/', '住记管理员入口'));
 await fs.mkdir(path.join(root,'aluminum'), { recursive:true });
 await fs.writeFile(path.join(root,'aluminum/index.html'), redirect('../versions/'+tag+'/aluminum/', '住记铝型材设计'));
+await fs.mkdir(path.join(root,'shoe-cabinet'), { recursive:true });
+await fs.writeFile(path.join(root,'shoe-cabinet/index.html'), redirect('../versions/'+tag+'/aluminum/designs/aluminum/elevator-shoe-cabinet/index.html', '电梯鞋柜独立预览'));
 const releaseIndexFile = path.join(root,'releases.json');
 const index = await exists(releaseIndexFile) ? JSON.parse(await fs.readFile(releaseIndexFile,'utf8')) : { defaultEdition:'admin', releases:[] };
 index.latest = tag; index.releases = [release, ...index.releases.filter(r=>r.version!==tag)];

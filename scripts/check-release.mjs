@@ -9,6 +9,8 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const index=JSON.parse(await fs.readFile(path.join(root,'releases.json'),'utf8'));
 const dir=path.join(root,'versions',index.latest);
 const manifest=JSON.parse(await fs.readFile(path.join(dir,'release.json'),'utf8'));
+const standalone=await fs.readFile(path.join(root,'shoe-cabinet/index.html'),'utf8');
+assert(standalone.includes('../versions/'+index.latest+'/aluminum/designs/aluminum/elevator-shoe-cabinet/index.html'),'Standalone shoe preview redirects to the current public model');
 assert.equal(manifest.defaultEdition,'admin');assert.equal(index.defaultEdition,'admin');
 const lines=(await fs.readFile(path.join(dir,'SHA256SUMS'),'utf8')).trim().split('\n');
 for(const line of lines){const [hash,name]=line.split('  ');assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(dir,name))).digest('hex'),hash,name+' checksum');}

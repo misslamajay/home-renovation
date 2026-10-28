@@ -12,6 +12,7 @@
 
 | 版本 | 内容 | 定位 |
 | --- | --- | --- |
+| v10.6.0 | 鞋柜净深400/350、左下并排双凳、最新净高、18厚纵向隔板封隔交集归右、137根型材、独立分享入口 | `versions/v10.6.0/`、同名 Git 标签和 Release |
 | v10.5.0 | 鞋柜门板到顶、横向侧挂灯箱、独立固定三格、凳子落地、133根型材尺寸 | `versions/v10.5.0/`、同名 Git 标签和 Release |
 | v10.4.0 | 福马轮电视基础框架、800/1000深度比较、完整型材尺寸、鞋柜对开门与白色洞洞板、加密全屋灯光 | `versions/v10.4.0/`、同名 Git 标签和 Release |
 | v10.3.0 | 电梯鞋柜九层净高、透明踢脚抽、500高换鞋凳、怪兽小屋灯箱；铝型材导航置顶 | `versions/v10.3.0/`、同名 Git 标签和 Release |
@@ -44,16 +45,16 @@
 
 ```sh
 # 默认构建管理员完整版本，并同时生成铝型材公开版本。
-npm run release -- --version 10.5.1 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
+npm run release -- --version 10.6.1 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
 npm run release:check
 
 # 审核构建及差异后提交；不得提交口令或源台账。
 git add .
-git commit -m "Release v10.5.1"
-git tag -a v10.5.1 -m "住记 v10.5.1"
+git commit -m "Release v10.6.1"
+git tag -a v10.6.1 -m "住记 v10.6.1"
 git push origin HEAD:main
-git push origin v10.5.1
-gh release create v10.5.1 .artifacts/v10.5.1/*.zip --verify-tag --title "住记 v10.5.1" --notes-file release-notes/v10.5.1.md
+git push origin v10.6.1
+gh release create v10.6.1 .artifacts/v10.6.1/*.zip --verify-tag --title "住记 v10.6.1" --notes-file release-notes/v10.6.1.md
 ```
 
 每次应先补充 `CHANGELOG.md` 与对应 `release-notes/` 文档，并保持版本号递增。构建拒绝覆盖带 Git 标签的版本；`--rebuild` 仅用于尚未标记、尚未发布的本地构建。管理员口令沿用本机凭证文件，不同版本之间的在线加密草稿可继续读取。管理员编辑保存在自己的浏览器，不会自动修改仓库中的发布台账；更新发布数据前需把最新台账放回本机源文件，或向构建命令传入 `--source-data` 指定导出的台账。
@@ -75,3 +76,5 @@ npm run preview
 - `tv-stand.html`、`materials.html`、`assets/`、`downloads/`：保留的电视架 V9 内容，旧版限制见 [原说明](./tv-stand-v9-readme.md)。
 
 铝型材模型用于空间、构造及运动审阅，滑轨额定承重和整柜稳定性仍需按实物选型核算，不作为可直接加工或承重认证的图纸。
+
+鞋柜独立公开预览（免登录）：https://misslamajay.github.io/home-renovation/shoe-cabinet/ 。每次发布随构建更新此入口；固定版本通过对应版本目录和 Release 查找。

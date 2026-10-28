@@ -1,0 +1,37 @@
+{
+  "version": "v10.6.0",
+  "createdAt": "2026-10-28T10:20:37.620Z",
+  "defaultEdition": "admin",
+  "modelRevision": 12,
+  "projects": [
+    {
+      "id": "living-mirror-cabinet",
+      "name": "客厅镜柜",
+      "revision": 12
+    },
+    {
+      "id": "mobile-tv-stand",
+      "name": "移动电视支架",
+      "revision": 10
+    },
+    {
+      "id": "elevator-shoe-cabinet",
+      "name": "电梯鞋柜",
+      "revision": 28
+    }
+  ],
+  "editions": {
+    "admin": {
+      "path": "./",
+      "access": "passphrase"
+    },
+    "aluminum": {
+      "path": "./aluminum/",
+      "access": "public"
+    }
+  },
+  "legacy": {
+    "version": "v9.0.0",
+    "path": "../../tv-stand.html"
+  }
+}

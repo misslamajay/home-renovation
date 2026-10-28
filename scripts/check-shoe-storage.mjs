@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
+import {validateShoePartition} from './check-shoe-partition.mjs';
 
 function overlap(a,b){
   if(Math.min(a.center[1]+a.size[1]/2,b.center[1]+b.size[1]/2)-Math.max(a.center[1]-a.size[1]/2,b.center[1]-b.size[1]/2)<.001)return false;
@@ -13,6 +14,7 @@ function overlap(a,b){
 export async function validateShoeStorage(directory){
   const root=path.join(directory,'aluminum/designs/aluminum/elevator-shoe-cabinet');
   const {model,stoolBay,shoeZone,storageParts,storageEnclosureParts}=await import(pathToFileURL(path.join(root,'storage-geometry.js')).href);
+  if(model.revision>=28)return validateShoePartition(directory);
   assert.equal(model.revision,22);assert.equal(model.members.length,117);
   assert.equal(new Set(model.members.map(p=>p.id)).size,117);
   assert.deepEqual(model.leftStorage.layers.map(l=>l.netHeight),[160,160,170,170,170,130,260,160,160]);

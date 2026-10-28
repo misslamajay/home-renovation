@@ -52,7 +52,11 @@ export async function preparePublicDesigns(source,stage,previewFile,version='当
   for(const name of ['index.html','dimensions.html','storage-report.js','README.md']){
     const file=path.join(shoe,name);if(!await fs.access(file).then(()=>true).catch(()=>false))continue;
     let text=await fs.readFile(file,'utf8');
-    text=text.replaceAll('本地候选 · 灯箱改侧挂','发布版 '+version+' · 灯箱侧挂')
+    text=text.replace(/本地调整 · ([^<\n]+)/g,'发布版 '+version+' · $1')
+      .replace(/当前为本地调整 r(\d+)，尚未发布。/g,'当前为 '+version+' 发布方案（模型 r$1）。')
+      .replaceAll('本地调整：','当前发布方案：').replaceAll('尚未发布','已发布')
+      .replaceAll('本轮仍只更新本地，待当前候选明确确认后再发布。','当前方案已按本版确认发布。')
+      .replaceAll('本地候选 · 灯箱改侧挂','发布版 '+version+' · 灯箱侧挂')
       .replaceAll('本地调整 · 上部有门，下部开放','发布版 '+version+' · 上部有门，下部开放')
       .replaceAll('仅更新本地住记，未发布。','住记 '+version+'。')
       .replaceAll('当前仅本地方案；','当前发布方案；').replaceAll('当前仅本地修改。','当前为 '+version+' 发布版。')
