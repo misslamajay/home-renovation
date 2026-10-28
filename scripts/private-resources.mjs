@@ -49,11 +49,13 @@ export async function preparePublicDesigns(source,stage,previewFile,version='当
   const original='shoe-cabinet-reference.png';
   await fs.cp(path.join(source,'designs/aluminum'),path.join(stage,'aluminum/designs/aluminum'),{recursive:true,filter:file=>path.basename(file)!==original&&!path.basename(file).startsWith('.')});
   const shoe=path.join(stage,'aluminum/designs/aluminum/elevator-shoe-cabinet');
-  for(const name of ['index.html','dimensions.html','storage-report.js','README.md']){
+  for(const name of ['index.html','dimensions.html','storage-report.js','slot-fit.html','README.md']){
     const file=path.join(shoe,name);if(!await fs.access(file).then(()=>true).catch(()=>false))continue;
     let text=await fs.readFile(file,'utf8');
-    text=text.replace(/本地调整 · ([^<\n]+)/g,'发布版 '+version+' · $1')
-      .replace(/当前为本地调整 r(\d+)，尚未发布。/g,'当前为 '+version+' 发布方案（模型 r$1）。')
+    text=text.replaceAll('本地核定 · 前后槽内插板 · 尚未发布','发布版 '+version+' · 入槽尺寸核定示意')
+      .replace(/当前线上仍为v[\d.]+/g,'当前线上为'+version)
+      .replace(/本地调整 · ([^<\n]+)/g,'发布版 '+version+' · $1')
+      .replace(/当前(?:为)?本地调整 r(\d+)，尚未发布。/g,'当前为 '+version+' 发布方案（模型 r$1）。')
       .replaceAll('本地调整：','当前发布方案：').replaceAll('尚未发布','已发布')
       .replaceAll('本轮仍只更新本地，待当前候选明确确认后再发布。','当前方案已按本版确认发布。')
       .replaceAll('本地候选 · 灯箱改侧挂','发布版 '+version+' · 灯箱侧挂')
