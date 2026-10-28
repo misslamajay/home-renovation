@@ -1,0 +1,35 @@
+
+    #bridge-tv-v1 { color:var(--foreground); --tv-pink:light-dark(rgb(224 137 166),rgb(216 137 163)); --tv-metal:light-dark(rgb(180 187 192),rgb(167 177 185)); --tv-screen:light-dark(rgb(27 28 31),rgb(25 27 30)); }
+    #bridge-tv-v1 .tv-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 16px; padding-right:90px; margin-bottom:8px; }
+    #bridge-tv-v1 .tv-name { font-weight:500; }
+    #bridge-tv-v1 .tv-sub { margin-bottom:16px; }
+    #bridge-tv-v1 .tv-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:16px 0 10px; }
+    #bridge-tv-v1 .tv-options { display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin-bottom:4px; }
+    #bridge-tv-v1 .tv-zoom { display:grid; grid-template-columns:auto minmax(70px,130px); align-items:center; gap:10px; }
+    #bridge-tv-v1 .tv-stage { width:100%; height:clamp(330px,72vw,580px); }
+    #bridge-tv-v1 canvas { display:block; width:100%; height:100%; touch-action:none; cursor:grab; }
+    #bridge-tv-v1 canvas:active { cursor:grabbing; }
+    #bridge-tv-v1 .tv-status { display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 12px; }
+    #bridge-tv-v1 .tv-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px 20px; margin-top:20px; }
+    #bridge-tv-v1 .tv-drawing { min-width:0; }
+    #bridge-tv-v1 .tv-drawing h3 { margin:0 0 8px; font-weight:500; }
+    #bridge-tv-v1 .tv-drawing svg { display:block; width:100%; overflow:visible; }
+    #bridge-tv-v1 .tv-svg text { fill:var(--foreground); font-family:inherit; font-size:12px; font-weight:400; }
+    #bridge-tv-v1 .tv-svg .profile { fill:color-mix(in srgb,var(--foreground) 16%,var(--background)); stroke:var(--foreground); stroke-width:.8; }
+    #bridge-tv-v1 .tv-svg .pink { fill:color-mix(in srgb,var(--tv-pink) 45%,var(--background)); stroke:var(--tv-pink); stroke-width:1; }
+    #bridge-tv-v1 .tv-svg .outline { fill:none; stroke:var(--foreground); stroke-width:1; }
+    #bridge-tv-v1 .tv-svg .screen { fill:color-mix(in srgb,var(--foreground) 7%,var(--background)); stroke:var(--foreground); stroke-width:1.2; }
+    #bridge-tv-v1 .tv-svg .wire { fill:none; stroke:var(--muted-foreground); stroke-width:.6; }
+    #bridge-tv-v1 .tv-svg .dim { fill:none; stroke:var(--foreground); stroke-width:.75; }
+    #bridge-tv-v1 .tv-svg .extension { fill:none; stroke:var(--muted-foreground); stroke-width:.6; }
+    #bridge-tv-v1 .tv-svg .hidden-line { fill:none; stroke:var(--muted-foreground); stroke-width:.8; stroke-dasharray:4 3; }
+    #bridge-tv-v1 .tv-svg .peg { fill:color-mix(in srgb,var(--foreground) 9%,var(--background)); stroke:var(--foreground); stroke-width:.8; }
+    #bridge-tv-v1 .tv-svg .peg-hole { fill:var(--muted-foreground); stroke:none; opacity:.45; }
+    #bridge-tv-v1 .tv-svg .accessory { fill:color-mix(in srgb,var(--foreground) 24%,var(--background)); stroke:var(--foreground); stroke-width:.65; }
+    #bridge-tv-v1 .tv-svg .acrylic { fill:var(--tv-pink); fill-opacity:.16; stroke:var(--tv-pink); stroke-width:.8; }
+    #bridge-tv-v1 .tv-svg .acrylic-pink { fill:var(--tv-pink); fill-opacity:.28; stroke:var(--tv-pink); stroke-width:.8; }
+    #bridge-tv-v1 .tv-svg .stay { fill:none; stroke:var(--tv-pink); stroke-width:.65; }
+    #bridge-tv-v1 .tv-foot { margin-top:16px; }
+    #bridge-tv-v1 [hidden] { display:none!important; }
+    @media(max-width:620px) { #bridge-tv-v1 .tv-grid { grid-template-columns:1fr; } }
+  

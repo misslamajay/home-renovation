@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+<title>移动电视支架 · 福马轮基础框架</title>
+<link rel="stylesheet" href="assets/foundation.css">
+<script type="module" src="assets/foundation.js"></script>
+</head>
+<body>
+<main>
+  <header class="intro"><div><p class="eyebrow">移动电视支架 / 本地基础方案</p><h1>先把骨架立稳</h1><p>矩形底座 · 双主立柱 · 四根前后斜撑 · 背面交叉撑</p></div><div class="size"><strong id="overall-size">2400 × 1000 × 1880</strong><span id="size-state">mm · 调平停放状态</span><a href="index.html">查看原 V9 方案 ↗</a></div></header>
+  <section class="viewer" aria-label="基础框架三维预览">
+    <div class="toolbar"><div class="segmented" role="group" aria-label="底座深度"><button data-depth="1000" aria-pressed="true">深 1000 · 稳定优先</button><button data-depth="800" aria-pressed="false">深 800 · 原占地</button></div><span id="depth-note">候选方案，比原底座多占 200 mm</span></div>
+    <div class="controls"><div role="group" aria-label="观察角度"><button data-view="perspective" aria-pressed="true">整体</button><button data-view="front" aria-pressed="false">正面</button><button data-view="side" aria-pressed="false">侧面</button><button data-view="rear" aria-pressed="false">背面</button><button data-view="caster" aria-pressed="false">福马轮连接</button></div><div class="switches"><label><input id="parked" type="checkbox" checked>脚垫落地</label><label><input id="show-tv" type="checkbox">电视占位</label><label><input id="show-dims" type="checkbox" checked>尺寸</label><label><input id="show-ids" type="checkbox">型材编号</label></div></div>
+    <div class="stage"><canvas id="frame-canvas" tabindex="0" aria-label="可旋转电视架模型，拖动旋转、滚轮缩放，方向键调整角度">可旋转基础框架，详见下方尺寸图和型材清单。</canvas><div class="stage-key"><span><i class="metal"></i>4080 主框 / 4040 斜撑</span><span><i class="orange"></i>福马轮调节旋钮</span></div></div>
+    <div class="viewer-foot"><span id="frame-status" role="status">停放：四只脚垫落地，轮子离地约 5 mm</span><span>拖动旋转 · 滚轮缩放 · 方向键旋转</span></div>
+  </section>
+  <div class="outline-strip"><p><b>底座外廓</b><span id="base-summary"></span></p><p><b>支撑点跨度</b><span id="support-summary"></span></p><p><b>主立柱</b><span>2 根 40 × 80 mm</span></p><p><b>福马轮</b><span>4 只 GD-80-F-HUP</span></p></div>
+  <section class="explain" aria-label="框架连接方式">
+    <article><h2>让受力一路传到底座</h2><p>电视挂梁 → 双主立柱 → 立柱下承梁 → 前后底梁 → 轮座双承梁 → 钢转接板 → 福马轮脚垫。前后四根 4040 斜撑约束俯仰，背面两根钢扁撑约束左右摆动。</p><p>立柱脚采用双面 8 mm 钢连接板；斜撑采用成对耳板连接；横梁端部用角码和加固连接片。连接片、螺栓和型材壁厚仍需按最终型材与挂架验算。</p></article>
+    <article class="wheel-note"><h2>福马轮连接</h2><p>每只轮用一块 <b>160 × 160 × 8 mm 钢转接板</b>跨接两根 4080 承梁，不把轮子直接拧在单个槽口上。型材侧连接中心距暂定 60 × 130 mm；轮侧按原厂 70 × 70 mm、Ø9 孔位建模。</p><p>GD-80-F-HUP：轮径 63、安装高度 103、调平行程 15、原厂顶板 90 × 90 mm。原厂标注单只 550 kg、四只合用 1100 kg；这是脚轮参数，不能作为整架额定承重。</p><a id="caster-source" target="_blank" rel="noopener">原厂尺寸与载荷说明 ↗</a></article>
+  </section>
+  <section class="report" id="dimensions" aria-labelledby="dim-title"><div class="section-heading"><div><p class="eyebrow">尺寸与构件 / 单位 mm</p><h2 id="dim-title">从外廓到每一根型材</h2></div><div class="downloads"><button id="download-svg">下载编号尺寸 SVG</button><button id="download-csv">下载逐根 CSV</button></div></div><div id="dimension-drawing" class="drawing"></div><div id="dimension-notes" class="notes-grid"></div><p class="drawing-note">尺寸基准：Y=0 为地面；构件坐标以轮子接地的移动状态为准，脚垫落地后整体升高 5 mm。型材表是模型几何长度；槽宽、壁厚、端部加工、螺栓、孔位和余量待核定，不能直接下料。</p><details><summary><span id="profile-count"></span> · 展开分组汇总与逐根编号</summary><div id="stock-summary"></div><div class="table-scroll"><table><thead><tr><th>编号</th><th>安装位置</th><th>截面 A × B</th><th>几何长度</th><th>数量</th><th>起点 / 终点 X,Y,Z</th></tr></thead><tbody id="profile-rows"></tbody></table></div><p id="hardware-summary"></p></details></section>
+  <section class="stability" id="stability" aria-labelledby="stability-title"><div class="section-heading"><div><p class="eyebrow">抗倾覆 / 静态几何初核</p><h2 id="stability-title">深度与低位质量一起决定余量</h2></div><span class="status-badge">示例参数，待实测</span></div><p>沿用原 85 寸电视约 39 kg，重心暂放在立柱前方 90 mm。仅计入电视和下方输入的底座低位质量，不计其他上部型材的有利自重；按水平推力估算前后最不利方向。下面的结果不包含坡度、越障、撞击及节点强度。</p><div class="calc-inputs"><label>底座低位质量 <input id="base-mass" type="number" value="35" min="0" max="250" step="1"> kg <small>含底框、轮座等，35 kg 尚待称重</small></label><label>水平推力 <input id="push-force" type="number" value="100" min="10" max="1000" step="10"> N <small>校核示例，非产品试验标准</small></label><label>推力离地高度 <input id="push-height" type="number" value="1500" min="100" max="2200" step="50"> mm</label></div><div id="stability-result" aria-live="polite"></div><p class="drawing-note">初筛比较目标取恢复力矩 / 倾覆力矩 ≥ 1.5，仅用于这两个候选方案的静态比较。整架可用载荷还取决于型材截面参数、连接件、VESA 挂架、实际总重和重心，需节点验算及实物加载、侧推和推行测试后确定。停放时四垫调平；移动时收回脚垫，在平整硬地推底部。63 mm 小轮遇地毯边或门槛应另核越障条件。</p></section>
+  <footer>本地草案 · 基础框架先确认，再细化层板、收纳与外观。<a href="index.html">原 V9 保留对照 ↗</a></footer>
+</main>
+</body>
+</html>
