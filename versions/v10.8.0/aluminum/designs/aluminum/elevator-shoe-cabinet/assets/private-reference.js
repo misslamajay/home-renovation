@@ -1,0 +1,1 @@
+(async()=>{const owner=parent!==window&&parent.ZhujiPrivate;if(!owner)return;try{const link=document.getElementById('private-reference');link.href=await owner.url('shoe-reference-original');link.hidden=false;}catch{}})();

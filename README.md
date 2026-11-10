@@ -12,6 +12,7 @@
 
 | 版本 | 内容 | 定位 |
 | --- | --- | --- |
+| v10.8.0 | 同步当前采购台账、订单替换、赠品归属与待办进度；管理员加密资料及独立铝型材分享版 | `versions/v10.8.0/`、同名 Git 标签和 Release |
 | v10.7.1 | 修正三维图状态栏旧净深标注，加入可见文字回归检查；保留420/360总深与入槽核定 | `versions/v10.7.1/`、同名 Git 标签和 Release |
 | v10.7.0 | 鞋柜无背板、左总深420/右360、净深360/300、入槽参考截面376/316与交互SVG | `versions/v10.7.0/`、同名 Git 标签和 Release |
 | v10.6.0 | 鞋柜净深400/350、左下并排双凳、最新净高、18厚纵向隔板封隔交集归右、137根型材、独立分享入口 | `versions/v10.6.0/`、同名 Git 标签和 Release |
@@ -47,16 +48,16 @@
 
 ```sh
 # 默认构建管理员完整版本，并同时生成铝型材公开版本。
-npm run release -- --version 10.6.1 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
+npm run release -- --version 10.8.1 --source ../住记/Web --credentials ../住记/私密发布/admin-access.json
 npm run release:check
 
 # 审核构建及差异后提交；不得提交口令或源台账。
 git add .
-git commit -m "Release v10.6.1"
-git tag -a v10.6.1 -m "住记 v10.6.1"
+git commit -m "Release v10.8.1"
+git tag -a v10.8.1 -m "住记 v10.8.1"
 git push origin HEAD:main
-git push origin v10.6.1
-gh release create v10.6.1 .artifacts/v10.6.1/*.zip --verify-tag --title "住记 v10.6.1" --notes-file release-notes/v10.6.1.md
+git push origin v10.8.1
+gh release create v10.8.1 .artifacts/v10.8.1/*.zip --verify-tag --title "住记 v10.8.1" --notes-file release-notes/v10.8.1.md
 ```
 
 每次应先补充 `CHANGELOG.md` 与对应 `release-notes/` 文档，并保持版本号递增。构建拒绝覆盖带 Git 标签的版本；`--rebuild` 仅用于尚未标记、尚未发布的本地构建。管理员口令沿用本机凭证文件，不同版本之间的在线加密草稿可继续读取。管理员编辑保存在自己的浏览器，不会自动修改仓库中的发布台账；更新发布数据前需把最新台账放回本机源文件，或向构建命令传入 `--source-data` 指定导出的台账。

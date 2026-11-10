@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>电梯鞋柜 · 效果图</title>
+  <style>
+    :root{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#202124;background:#fff;font-synthesis:none}
+    *{box-sizing:border-box}body{margin:20px}main{max-width:860px;margin:auto}
+    .reference-card{border:1px solid #e5e7ea;border-radius:16px;overflow:hidden;background:#fff}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;border-bottom:1px solid #eceef1}
+    .eyebrow{margin:0 0 8px;color:#737a81;font-size:11px}h1{margin:0;font-size:19px;font-weight:600}
+    .original{flex-shrink:0;color:#087df1;font-size:12px;text-decoration:none;border:1px solid #dce3e9;border-radius:8px;padding:9px 12px}
+    .original:hover{background:#f5f9ff}.original:focus-visible{outline:2px solid #087df1;outline-offset:3px}
+    figure{margin:0;padding:24px}.photo{position:relative;aspect-ratio:3/4;max-width:600px;margin:auto;overflow:hidden;border-radius:6px;background:#f4f2ea}
+    .photo img{position:absolute;top:0;left:0;display:block;width:100%;height:auto;max-width:none;transform:none}
+    figcaption{max-width:600px;margin:16px auto 0;font-size:12px;line-height:1.8;color:#68737c}
+    .reference-note{margin:0;padding:16px 24px;border-top:1px solid #eceef1;font-size:12px;line-height:1.9;color:#737a81}
+    @media(max-width:600px){body{margin:12px}header{padding:16px;align-items:flex-start}h1{font-size:17px}figure{padding:14px}.reference-note{padding:14px 16px}.original{font-size:11px;padding:8px}}
+  </style>
+</head>
+<body>
+  <main>
+    <section class="reference-card" aria-label="鞋柜效果图">
+      <header>
+        <div><p class="eyebrow">效果图 · 用户提供</p><h1>电梯鞋柜效果图</h1></div>
+        <a class="original" id="private-reference" hidden target="_blank" rel="noopener">查看完整原图 ↗</a>
+      </header>
+      <figure>
+        <div class="photo"><img src="./assets/shoe-cabinet-reference-preview.png" width="1320" height="2868" alt="鞋柜配色参考：银色铝框搭配蓝色、黄色、红色和炭黑面板，外围为亮黄色边框。"></div>
+        <figcaption>银色铝框 · 红黄蓝与炭黑面板<br>参考图片来自你提供的截图，截图作者：鼻屎侠。</figcaption>
+      </figure>
+      <p class="reference-note">本图记录鞋柜的配色与风格参考。L形柜体、对开门、换鞋凳和白色洞洞板的布局及尺寸，见本项目的“三维图”和“分区尺寸”。</p>
+    </section>
+  </main>
+  <script>
+    let lastHeight = 0;
+    function reportSize() {
+      const height = Math.ceil(document.body.getBoundingClientRect().bottom + scrollY) + 8;
+      if (parent !== window && height !== lastHeight) {
+        lastHeight = height;
+        parent.postMessage({type:'zhuji-design-size',height}, location.origin);
+      }
+    }
+    new ResizeObserver(reportSize).observe(document.body);
+    addEventListener('load', reportSize);
+    reportSize();
+  </script>
+<script src="./assets/private-reference.js"></script>
+</body>
+</html>
